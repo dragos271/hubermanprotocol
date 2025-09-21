@@ -1,0 +1,24 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  padding: 14px 0;
+}
+
+.nav a {
+  display: inline-block;
+  margin-left: 18px;
+  padding: 10px 0;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+.nav a:hover { color: var(--text); }

@@ -1,0 +1,13 @@
+.wrap { margin-bottom: 14px; }
+.label {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+.audio {
+  width: 100%;
+  max-width: 640px;
+  filter: invert(1);             /* make default controls light */
+  background: transparent;
+  outline: none;
+}
