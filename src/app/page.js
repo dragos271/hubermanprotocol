@@ -121,12 +121,12 @@ export default function Home() {
           <div>
             <h2 className={styles.blockTitle}>NSDR / Yoga Nidra</h2>
             <p className={styles.blockSubtitle}>
-              Use 10–40 minute non-sleep deep rest to restore dopamine, reduce stress, and improve learning.
+              Use 10–30 minute non-sleep deep rest to restore dopamine, reduce stress, and improve learning.
             </p>
 
-            <AudioPlayer label="10-Minute NSDR" src="/audio/nsdr-10m.mp3" />
-            <AudioPlayer label="20-Minute NSDR" src="/audio/nsdr-20m.mp3" />
-            <AudioPlayer label="40-Minute NSDR" src="/audio/nsdr-40m.mp3" />
+            <AudioPlayer label="10-Minute NSDR" src="/audio/10_minute_nsdr.mp3" />
+            <AudioPlayer label="20-Minute NSDR" src="/audio/20_minute_nsdr.mp3" />
+            <AudioPlayer label="30-Minute NSDR" src="/audio/30_minute_nsdr.mp3" />
           </div>
 
           <div>
