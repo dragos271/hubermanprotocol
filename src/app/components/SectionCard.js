@@ -1,6 +1,6 @@
 import styles from "../styles/SectionCard.module.css";
 
-export default function SectionCard({ id, title, icon, bullets = [], footnote }) {
+export default function SectionCard({ id, title, icon, bullets = [], footnote, children }) {
   return (
     <section id={id} className={styles.card} aria-labelledby={`${id}-title`}>
       <div className={styles.header}>
@@ -11,6 +11,7 @@ export default function SectionCard({ id, title, icon, bullets = [], footnote })
         {bullets.map((b, i) => <li key={i}>{b}</li>)}
       </ul>
       {footnote && <p className={styles.foot}>{footnote}</p>}
+      {children}
     </section>
   );
 }

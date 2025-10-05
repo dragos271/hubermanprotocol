@@ -40,16 +40,24 @@ export default function BreathingTool() {
     <div className={styles.box}>
       <button
         className={styles.button}
-        onClick={() => {
-          setCount(0);
-          setRunning(true);
-        }}
+        onClick={() => { setCount(0); setRunning(true); setPhase("ready"); }}
         disabled={running}
       >
-        {running ? "Running..." : "Start Physiological Sigh"}
+        {running ? "Running..." : "Start Physiological Sigh (10 cycles)"}
       </button>
 
-      <div className={styles.phase}>
+      <div className={styles.circleWrap}>
+        <div
+          className={[
+            styles.circle,
+            phase.includes("Inhale again") ? styles.topup :
+            phase.includes("Inhale") ? styles.inhale :
+            phase.includes("Exhale") ? styles.exhale : ""
+          ].filter(Boolean).join(" ")}
+        />
+      </div>
+
+      <div className={styles.phaseText}>
         {phase === "ready" && "Press start to begin"}
         {phase !== "ready" && phase !== "done" && <p>{phase}</p>}
         {phase === "done" && <p>✅ Complete</p>}

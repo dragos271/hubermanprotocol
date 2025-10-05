@@ -1,0 +1,654 @@
+/* Shared styles for dedicated topic pages */
+
+.pageWrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.pageTitle {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--text) 0%, var(--muted) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pageSubtitle {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.section {
+  margin-bottom: 60px;
+}
+
+.section h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.sectionDesc {
+  color: var(--muted);
+  font-size: 16px;
+  margin-bottom: 24px;
+  max-width: 700px;
+}
+
+.toolSection {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 60px;
+}
+
+.toolSection h2 {
+  margin-top: 0;
+}
+
+/* Phase Cards Grid */
+.phasesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.phaseCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.phaseCard h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.phaseCard ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.phaseCard li {
+  padding: 6px 0;
+  color: var(--muted);
+  font-size: 14px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.phaseCard li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--accent, #0070f3);
+}
+
+/* Tips Grid */
+.tipsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.tipCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.tipIcon {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.tipCard p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* Supplements Table */
+.supplementsTable {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 24px;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 2fr;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr 2fr;
+  gap: 16px;
+  padding: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.suppName {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.suppNote {
+  color: var(--muted);
+}
+
+.disclaimer {
+  background: rgba(255, 200, 0, 0.1);
+  border: 1px solid rgba(255, 200, 0, 0.3);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Science Cards */
+.scienceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.scienceCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.scienceCard h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.scienceCard p {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Stress page specific styles */
+.techniquesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.techniqueCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.techniqueCard h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.techDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.techDetails span {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.addictionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.addictionCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.addictionCard h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.addictionCard ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.addictionCard li {
+  padding: 8px 0;
+  color: var(--muted);
+  font-size: 14px;
+  position: relative;
+  padding-left: 20px;
+  line-height: 1.4;
+}
+
+.addictionCard li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent, #0070f3);
+  font-weight: bold;
+}
+
+/* Mental page specific styles */
+.protocolsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.protocolCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.protocolCard h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.protocolDesc {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.protocolCard ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.protocolCard li {
+  padding: 6px 0;
+  color: var(--muted);
+  font-size: 14px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.protocolCard li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--accent, #0070f3);
+}
+
+.strategiesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.strategyCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.strategyCard h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.strategyCard ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.strategyCard li {
+  padding: 8px 0;
+  color: var(--muted);
+  font-size: 14px;
+  position: relative;
+  padding-left: 20px;
+  line-height: 1.4;
+}
+
+.strategyCard li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent, #0070f3);
+  font-weight: bold;
+}
+
+.moodGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.moodCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.moodCard h4 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.moodDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.time {
+  font-size: 13px;
+  color: var(--accent, #0070f3);
+  font-weight: 500;
+}
+
+.benefit {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Enhanced micro-interactions and animations */
+
+/* Card hover effects */
+.phaseCard, .techniqueCard, .protocolCard, .strategyCard, .scienceCard, .tipCard, .moodCard, .addictionCard {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.phaseCard:hover, .techniqueCard:hover, .protocolCard:hover, .strategyCard:hover, .scienceCard:hover, .addictionCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent, #0070f3);
+}
+
+.tipCard:hover, .moodCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-color: var(--border-strong);
+}
+
+/* Shimmer effect on hover */
+.phaseCard::before, .techniqueCard::before, .protocolCard::before, .strategyCard::before, .scienceCard::before, .addictionCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+  z-index: 1;
+}
+
+.phaseCard:hover::before, .techniqueCard:hover::before, .protocolCard:hover::before, .strategyCard:hover::before, .scienceCard:hover::before, .addictionCard:hover::before {
+  left: 100%;
+}
+
+/* Enhanced button interactions */
+.calculateBtn {
+  position: relative;
+  overflow: hidden;
+}
+
+.calculateBtn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: width 0.4s, height 0.4s;
+  transform: translate(-50%, -50%);
+}
+
+.calculateBtn:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Pulse animation for important elements */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.toolSection:hover {
+  animation: pulse 2s infinite;
+}
+
+/* Progress bar animation */
+@keyframes fillProgress {
+  from { width: 0%; }
+  to { width: var(--progress-width, 100%); }
+}
+
+.progressBar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent, #0070f3), #00d4ff);
+  animation: fillProgress 1s ease-out;
+  border-radius: 2px;
+}
+
+/* Success checkmark animation */
+@keyframes checkmark {
+  0% { transform: scale(0) rotate(45deg); }
+  50% { transform: scale(1.2) rotate(45deg); }
+  100% { transform: scale(1) rotate(45deg); }
+}
+
+.successCheck {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-right: 3px solid #10b981;
+  border-bottom: 3px solid #10b981;
+  transform: rotate(45deg);
+  animation: checkmark 0.5s ease-in-out;
+}
+
+/* Floating animation for tips */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.tipCard:nth-child(odd) {
+  animation: float 6s ease-in-out infinite;
+}
+
+.tipCard:nth-child(even) {
+  animation: float 6s ease-in-out infinite 3s;
+}
+
+/* Enhanced table row interactions */
+.tableRow {
+  transition: all 0.2s ease;
+}
+
+.tableRow:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(4px);
+}
+
+/* Supplement name highlight effect */
+.suppName {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.tableRow:hover .suppName {
+  color: var(--accent, #0070f3);
+}
+
+.suppName::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent, #0070f3);
+  transition: width 0.3s ease;
+}
+
+.tableRow:hover .suppName::after {
+  width: 100%;
+}
+.dailySection {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 32px;
+}
+
+.dailySection h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 20px;
+  color: var(--text);
+}
+
+/* Enhanced tool sections for daily page */
+.toolSection h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pageWrap {
+    padding: 20px 16px;
+  }
+  
+  .tableHeader,
+  .tableRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .tableHeader span,
+  .tableRow span {
+    padding: 4px 0;
+  }
+  
+  .tableHeader {
+    display: none;
+  }
+  
+  .tableRow {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+  
+  .phasesGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tipsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .techniquesGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .addictionGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .protocolsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .strategiesGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .moodGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .dailySection {
+    padding: 24px;
+  }
+}

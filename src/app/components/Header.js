@@ -11,12 +11,15 @@ export default function Header() {
         </Link>
 
         <nav className={styles.nav} aria-label="Primary">
-          <a href="#sleep">Sleep</a>
-          <a href="#stress">Stress</a>
-          <a href="#mental">Mental</a>
-          <a href="#physical">Physical</a>
-          <a href="#nutrition">Nutrition</a>
-          <a href="#nsdr">NSDR</a>
+          <Link href="/daily">Daily</Link>
+          <Link href="/sleep">Sleep</Link>
+          <Link href="/stress">Stress</Link>
+          <Link href="/mental">Mental</Link>
+          <Link href="/physical">Physical</Link>
+          <Link href="/nutrition">Nutrition</Link>
+          <Link href="/nsdr">NSDR</Link>
+          <Link href="/seasonal">Seasonal</Link>
+          <Link href="/biohacking">Advanced</Link>
         </nav>
       </div>
     </header>

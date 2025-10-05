@@ -34,16 +34,20 @@ export default function SleepTool() {
   return (
     <div className={styles.box}>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <label>
-          Wake-up time:{" "}
+        <div className={styles.timeInputGroup}>
+          <label htmlFor="wake-time" className={styles.timeLabel}>
+            🌅 Wake-up time
+          </label>
           <input
+            id="wake-time"
             type="time"
             value={wakeTime}
             onChange={(e) => setWakeTime(e.target.value)}
             required
+            className={styles.timeInput}
           />
-        </label>
-        <button type="submit">Calculate</button>
+        </div>
+        <button type="submit" className={styles.calculateBtn}>Calculate Sleep Schedule</button>
       </form>
 
       {result && (

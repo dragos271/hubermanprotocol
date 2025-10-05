@@ -1,202 +1,218 @@
 import Header from "../app/components/Header";
 import Footer from "../app/components/Footer";
-import AudioPlayer from "../app/components/AudioPlayer";
-import SectionCard from "../app/components/SectionCard";
-import ArticleCard from "../app/components/ArticleCard";
+import Quote from "../app/components/Quote";
+import { FadeIn, FadeInScale } from "../app/components/Motion";
+import CircadianWheel from "../app/components/CircadianWheel";
+import BodySystemDiagram from "../app/components/BodySystemDiagram";
+import NeurotransmitterBalance from "../app/components/NeurotransmitterBalance";
 import styles from "./page.module.css";
-import SleepTool from "./components/SleepTool";
-import BreathingTool from "./components/BreathingTool";
 
-const protocols = [
-  {
-    id: "sleep",
-    title: "Sleep",
-    icon: "🌅",
-    bullets: [
-      "Morning light: 10–30 min sunlight within 60 min of waking.",
-      "Evening light: Dim lights and avoid bright screens 90 min before bed.",
-      "Caffeine cut-off: 8–10 hours before sleep.",
-      "Cool room (18–20°C). Keep it dark & quiet.",
-    ],
-    footnote: "Light anchors circadian rhythm; dim evenings support melatonin.",
-  },
-  {
-    id: "stress",
-    title: "Stress",
-    icon: "🌬️",
-    bullets: [
-      "Physiological sigh: 1× double inhale through nose, long exhale; repeat 1–3 minutes.",
-      "NSDR/Yoga Nidra: 10–40 min sessions to restore dopamine & reduce cortisol.",
-      "Cold exposure: short deliberate bouts (end on cold) to build stress resilience.",
-      "Walks: 10–20 min brisk walks reduce stress reactivity.",
-    ],
-    footnote: "Breath & state control leverage autonomic nervous system mechanisms.",
-  },
-  {
-    id: "mental",
-    title: "Mental Health",
-    icon: "🧠",
-    bullets: [
-      "Gratitude: 2–3 min daily—specific, other-focused events.",
-      "Social connection: schedule meaningful interactions weekly.",
-      "Non-sleep deep rest: use after high-stress or poor sleep days.",
-      "Sunlight & exercise: foundational for mood regulation.",
-    ],
-    footnote: "Simple, repeated behaviors shift baseline neurochemistry over time.",
-  },
-  {
-    id: "physical",
-    title: "Physical",
-    icon: "🏋️",
-    bullets: [
-      "Strength: 3–5×/week; compound lifts; progressive overload.",
-      "Zone 2: 150–180 min/week conversational-pace cardio.",
-      "Zone 5: 2–3 short HIIT bouts/week for VO₂ peak.",
-      "Walk after meals: 10 min blunts glucose spike.",
-    ],
-    footnote: "Blend resistance + aerobic for longevity, metabolic & brain health.",
-  },
-  {
-    id: "nutrition",
-    title: "Nutrition",
-    icon: "🥗",
-    bullets: [
-      "Protein: ~1 g per lb body weight/day; spread across meals.",
-      "Fasting window: 12–16 h daily (as tolerated; not for everyone).",
-      "Electrolytes: hydrate with sodium/potassium esp. during fasts & workouts.",
-      "Caffeine timing: use early day to support circadian alignment.",
-    ],
-    footnote: "Adjust to context; quality whole foods, adequate protein, fiber.",
-  },
-];
+export const metadata = {
+  title: "Huberman Protocol – Science-Based Systems for Mind & Body",
+  description: "Understand the neuroscience-based framework for optimizing sleep, stress, focus, and recovery.",
+};
 
-const articles = [
-  {
-    title: "How Light Controls Sleep",
-    blurb: "Circadian entrainment via ipRGCs; why morning & evening light set your clock.",
-    url: "#sleep",
-  },
-  {
-    title: "Cold Exposure for Stress",
-    blurb: "Catecholamines, deliberate stress, and safe protocols for adaptation.",
-    url: "#stress",
-  },
-  {
-    title: "NSDR: Practical Recovery",
-    blurb: "Non-sleep deep rest boosts dopamine & focus; when and how to use it.",
-    url: "#nsdr",
-  },
-];
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className={styles.wrapper}>
+    <>
       <Header />
 
       <main className="container">
         {/* HERO */}
         <section className={styles.hero}>
-          <h1 className={styles.title}>Science-based protocols for your brain & body</h1>
-          <p className={styles.subtitle}>
-            Practical, fact-driven tools inspired by neuroscience & physiology to improve sleep,
-            stress, mental & physical health.
-          </p>
+          <FadeIn>
+            <h1 className={styles.title}>Science-Based Systems for the Brain & Body</h1>
+          </FadeIn>
+          <FadeIn delay={0.05}>
+            <p className={styles.subtitle}>
+              A framework built on validated neuroscience to regulate sleep, stress,
+              focus, and recovery — inspired by Dr. Andrew Huberman and supported by current research.
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <div className={styles.ctas}>
+              <a href="/daily" className={styles.buttonPrimary}>Start Daily Protocol</a>
+              <a href="#pillars" className={styles.buttonGhost}>Learn the Science</a>
+            </div>
+          </FadeIn>
         </section>
 
-        {/* PROTOCOL CARDS */}
-        <section aria-label="Protocols" className={styles.sectionsGrid}>
-          {protocols.map((p) => (
-            <>
-              <SectionCard key={p.id} title={p.title} icon={p.icon} bullets={p.bullets} footnote={p.footnote} id={p.id} />
-              {p.id === "sleep" && <SleepTool />}
-              {p.id === "stress" && <BreathingTool />}
-            </>
-          ))}
-        </section>
+        {/* QUOTE */}
+        <Quote />
 
-        <div className={styles.divider} />
-
-        {/* NSDR + NEWSLETTER */}
-        <section id="nsdr" className={`${styles.block} ${styles.twoCol}`}>
-          <div>
-            <h2 className={styles.blockTitle}>NSDR / Yoga Nidra</h2>
-            <p className={styles.blockSubtitle}>
-              Use 10–30 minute non-sleep deep rest to restore dopamine, reduce stress, and improve learning.
-            </p>
-
-            <AudioPlayer label="10-Minute NSDR" src="/audio/10_minute_nsdr.mp3" />
-            <AudioPlayer label="20-Minute NSDR" src="/audio/20_minute_nsdr.mp3" />
-            <AudioPlayer label="30-Minute NSDR" src="/audio/30_minute_nsdr.mp3" />
-          </div>
-
-          <div>
-            <h3 className={styles.blockTitle}>Get the weekly protocol digest</h3>
-            <p className={styles.blockSubtitle}>
-              One concise email with actionable steps, references, and tools.
-            </p>
-            <form
-              action="https://formspree.io/f/xayvlqyy" /* replace with your Formspree endpoint */
-              method="POST"
-            >
-              <input
-                type="email"
-                name="email"
-                placeholder="you@domain.com"
-                required
-                aria-label="Email address"
-                style={{
-                  width: "100%",
-                  padding: "14px 16px",
-                  borderRadius: "12px",
-                  border: "1px solid var(--border)",
-                  background: "var(--panel)",
-                  color: "var(--text)",
-                  outline: "none",
-                  marginBottom: "12px",
-                }}
-              />
-              <button
-                type="submit"
-                style={{
-                  width: "100%",
-                  padding: "14px 16px",
-                  borderRadius: "12px",
-                  border: "1px solid var(--border-strong)",
-                  background: "linear-gradient(180deg, #1a1a1a, #0e0e0e)",
-                  color: "var(--text)",
-                  fontWeight: 600,
-                  cursor: "pointer",
-                }}
-              >
-                Subscribe
-              </button>
-            </form>
-            <p className={styles.blockSubtitle} style={{ marginTop: 10 }}>
-              No spam. Unsubscribe anytime.
-            </p>
+        {/* FIVE PILLARS */}
+        <section id="pillars" className={styles.pillars}>
+          <FadeIn><h2>Core Pillars of Human Optimization</h2></FadeIn>
+          <div className={styles.grid}>
+            {pillars.map((p, idx) => (
+              <FadeInScale key={p.title} delay={idx * 0.06}>
+                <div className={styles.card}>
+                  <div className={styles.icon}>{p.icon}</div>
+                  <h3>{p.title}</h3>
+                  <p>{p.desc}</p>
+                  <ul>
+                    {p.actions.map((a, i) => <li key={i}>{a}</li>)}
+                  </ul>
+                </div>
+              </FadeInScale>
+            ))}
           </div>
         </section>
 
-        <div className={styles.divider} />
+        {/* THE SCIENCE */}
+        <section className={styles.science}>
+          <FadeIn><h2>The Neuroscience Behind the System</h2></FadeIn>
+          <FadeIn delay={0.05}>
+            <p>
+              Your biology follows predictable rhythms. Light, movement, breath, and rest
+              determine hormone release, attention, and recovery. By aligning these behaviors
+              with your natural cycles, you can improve performance, mood, and longevity
+              without willpower or supplements.
+            </p>
+          </FadeIn>
 
-        {/* ARTICLES */}
-        <section aria-label="Articles" className={styles.sectionsGrid}>
-          {articles.map((a) => (
-            <ArticleCard key={a.title} title={a.title} blurb={a.blurb} href={a.url} />
-          ))}
+          <div className={styles.scienceGrid}>
+            {science.map((s, i) => (
+              <FadeIn key={s.t} delay={i * 0.05}>
+                <div className={styles.card}>
+                  <h4 style={{ marginTop: 0 }}>{s.t}</h4>
+                  <p style={{ color: "var(--muted)" }}>{s.p}</p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </section>
+{/* PROTOCOL LIBRARY (actionable) */}
+<section className={styles.library}>
+  <h2>Protocol Library (Do These Today)</h2>
+  <div className={styles.protoGrid}>
+
+    {/* SLEEP */}
+    <article id="sleep" className={styles.proto}>
+      <h3>Sleep Protocol</h3>
+      <p>Anchor circadian rhythm and reduce sleep latency.</p>
+      <ul>
+        <li>🌅 <strong>Morning light:</strong> 10–30 min outdoors within 60 min of waking.</li>
+        <li>☕ <strong>Caffeine cutoff:</strong> ~8–10 hours before intended sleep.</li>
+        <li>🕯️ <strong>Evening dim:</strong> 90 min before bed, reduce bright screens; use warm/low lights.</li>
+        <li>❄️ <strong>Cool, dark room:</strong> ~18–20 °C; blackout and quiet if possible.</li>
+        <li>🧘 <strong>NSDR:</strong> 10–20 min on low-sleep days to restore alertness.</li>
+      </ul>
+      <p className={styles.smallNote}>Why it works: light → ipRGCs → SCN entrainment; dim evenings support melatonin.</p>
+    </article>
+
+    {/* STRESS */}
+    <article id="stress" className={styles.proto}>
+      <h3>Stress Regulation</h3>
+      <p>Rapid state control via breath + deliberate recovery.</p>
+      <ul>
+        <li>💨 <strong>Physiological sigh:</strong> 1× double nasal inhale + long exhale, 1–3 min during spikes.</li>
+        <li>🧘 <strong>NSDR/Yoga Nidra:</strong> 10–40 min to reduce cortisol and reset dopamine.</li>
+        <li>🚶 <strong>Walk:</strong> 10–20 min brisk walk, especially post-meal or during work breaks.</li>
+        <li>❄️ <strong>Optional cold:</strong> Short, safe cold exposure; end on cold for adaptation (screen for contraindications).</li>
+      </ul>
+      <p className={styles.smallNote}>Why it works: CO₂ offload + vagal tone shift; deliberate stress improves stress tolerance.</p>
+    </article>
+
+    {/* FOCUS */}
+    <article id="focus" className={styles.proto}>
+      <h3>Focus & Productivity</h3>
+      <p>Structure dopamine and attention with timed effort/recovery.</p>
+      <ul>
+        <li>⏱️ <strong>90/20 cycles:</strong> Deep work 60–90 min → 10–20 min reset (walk, breath, eyes off screens).</li>
+        <li>☕ <strong>Caffeine timing:</strong> Use early day; avoid after midday if sleep is a goal.</li>
+        <li>🧘 <strong>NSDR after heavy learning:</strong> 10 min to consolidate memory.</li>
+        <li>🌅 <strong>Light + movement first:</strong> Set arousal before cognitive blocks.</li>
+      </ul>
+      <p className={styles.smallNote}>Why it works: controlled arousal windows + parasympathetic resets maintain performance.</p>
+    </article>
+
+    {/* RECOVERY */}
+    <article id="recovery" className={styles.proto}>
+      <h3>Recovery & Resilience</h3>
+      <p>Intentional down-regulation to improve baseline.</p>
+      <ul>
+        <li>🧘 <strong>NSDR:</strong> 10–30 min on high-stress or low-sleep days.</li>
+        <li>💨 <strong>Downshift breathing:</strong> slow nasal exhales (e.g., 4–6 breaths/min for 5 min).</li>
+        <li>🌙 <strong>Evening routine:</strong> dim environment, low stimulation, consistent sleep window.</li>
+        <li>📓 <strong>Gratitude:</strong> 2–3 min, specific and other-focused (pro-social bias).</li>
+      </ul>
+      <p className={styles.smallNote}>Why it works: parasympathetic activation restores dopaminergic tone and sleep readiness.</p>
+    </article>
+
+    {/* NUTRITION */}
+    <article id="nutrition" className={styles.proto}>
+      <h3>Nutrition & Movement</h3>
+      <p>Stable energy, better glucose control, mitochondrial health.</p>
+      <ul>
+        <li>🥚 <strong>Protein target:</strong> ~1.6–2.2 g/kg per body weight/day , spread across meals.</li>
+        <li>🚶 <strong>Post-meal walk:</strong> 10–15 min to blunt glucose spikes.</li>
+        <li>🚴 <strong>Zone 2:</strong> 150–180 min/week conversation-pace cardio; add 2–3 short HIIT bouts.</li>
+        <li>🕰️ <strong>Feeding window:</strong> 12–16 h daily if appropriate; finish eating 2–3 h before bed.</li>
+        <li>🧂 <strong>Hydration & electrolytes:</strong> especially with fasts or training.</li>
+      </ul>
+      <p className={styles.smallNote}>Why it works: better glycemic control and aerobic base support brain & body performance.</p>
+    </article>
+
+  </div>
+</section>
+
+        {/* INTERACTIVE VISUALIZATIONS */}
+        <section className={styles.visualizations}>
+          <FadeIn><h2>Interactive Science Visualizations</h2></FadeIn>
+          <FadeIn delay={0.05}>
+            <p>Explore how protocols affect your biology in real-time</p>
+          </FadeIn>
+          
+          <div className={styles.visualGrid}>
+            <FadeIn delay={0.1}>
+              <div className={styles.visualCard}>
+                <CircadianWheel />
+              </div>
+            </FadeIn>
+            
+            <FadeIn delay={0.15}>
+              <div className={styles.visualCard}>
+                <BodySystemDiagram />
+              </div>
+            </FadeIn>
+          </div>
+          
+          <FadeIn delay={0.2}>
+            <div className={styles.visualCardFull}>
+              <NeurotransmitterBalance />
+            </div>
+          </FadeIn>
         </section>
 
-        <div style={{ height: 48 }} />
-
-        <p className={styles.footerNote}>
-          Content compiled from peer-reviewed research discussed on the Huberman Lab Podcast.
-          This educational site is not medical advice.
-        </p>
-
-        <div style={{ height: 32 }} />
+        {/* CTA */}
+        <FadeIn>
+          <section className={styles.ctaBlock}>
+            <h2>Start Your Daily Neuroscience System</h2>
+            <p>
+              Move from knowledge to action. The Daily page guides you step-by-step through
+              morning light, breathing, NSDR, and sleep planning.
+            </p>
+            <a href="/daily" className={styles.buttonPrimaryLarge}>Begin My Day →</a>
+          </section>
+        </FadeIn>
       </main>
 
       <Footer />
-    </div>
+    </>
   );
 }
+
+const pillars = [
+  { title: "Sleep", icon: "🌙", desc: "Anchor circadian rhythm and improve recovery.", actions: ["Morning light exposure", "Caffeine cutoff", "NSDR or nap"] },
+  { title: "Stress", icon: "💨", desc: "Regulate your autonomic nervous system.", actions: ["Physiological sigh", "Cold exposure", "Evening calm routine"] },
+  { title: "Focus", icon: "🧠", desc: "Control dopamine and attention through structured effort & rest.", actions: ["90/20 deep-work cycles", "NSDR after intense focus", "Caffeine timing"] },
+  { title: "Recovery", icon: "🧘", desc: "Reset your nervous system and build resilience.", actions: ["NSDR", "Breathwork", "Sleep hygiene"] },
+  { title: "Nutrition & Movement", icon: "🥗", desc: "Fuel mitochondria and stabilize energy.", actions: ["Protein-rich meals", "Zone-2 cardio", "Post-meal walks"] },
+];
+
+const science = [
+  { t: "🔆 Light & Circadian Rhythm", p: "Morning sunlight activates ipRGCs, anchoring the SCN and regulating cortisol & melatonin." },
+  { t: "💨 Breath & State Control", p: "Physiological sighs modulate CO₂ and vagal tone, shifting you from stress to calm." },
+  { t: "🧘 Recovery & Learning", p: "NSDR restores dopamine and accelerates learning via parasympathetic activation." },
+];

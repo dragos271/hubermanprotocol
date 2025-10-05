@@ -22,3 +22,21 @@
   transition: color 0.2s ease;
 }
 .nav a:hover { color: var(--text); }
+
+.nav a {
+  position: relative;
+}
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 4px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
+  opacity: .6;
+}
+.nav a:hover::after {
+  transform: scaleX(1);
+}
