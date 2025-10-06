@@ -1,25 +1,56 @@
 /* Topics Page Styles */
 
+/* Container override for topics page */
+.topicsContainer {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0;
+}
+
 /* Hero Section */
 .hero {
-  text-align: center;
-  padding: 80px 0;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
-  border-radius: 24px;
-  margin-bottom: 80px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 100px 40px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(147, 51, 234, 0.08) 100%);
+  border-radius: 32px;
+  margin: 0 24px 80px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  width: calc(100% - 48px);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .heroContent {
-  max-width: 900px;
+  text-align: center;
+  max-width: 800px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.heroContent * {
+  text-align: center;
 }
 
 .title {
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 700;
-  margin-bottom: 24px;
-  line-height: 1.2;
+  margin: 0 auto 32px auto;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-align: center;
+  display: block;
 }
 
 .titleGradient {
@@ -30,38 +61,57 @@
 }
 
 .subtitle {
-  font-size: 1.3rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
   color: var(--muted);
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto 40px;
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto 60px auto;
+  font-weight: 400;
+  text-align: center;
+  display: block;
 }
 
 .heroStats {
   display: flex;
   justify-content: center;
-  gap: 60px;
+  align-items: center;
+  gap: clamp(40px, 8vw, 80px);
   margin-top: 60px;
   flex-wrap: wrap;
 }
 
 .stat {
   text-align: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  min-width: 120px;
+  transition: all 0.3s ease;
+}
+
+.stat:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .statNumber {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 4vw, 2.8rem);
   font-weight: 700;
   color: var(--accent);
   margin-bottom: 8px;
+  line-height: 1;
 }
 
 .statLabel {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   font-weight: 600;
+  line-height: 1.2;
 }
 
 /* Section Headers */
