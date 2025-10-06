@@ -52,11 +52,48 @@
   border-radius: 16px;
   padding: 32px;
   margin-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toolSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 112, 243, 0.05) 0%, rgba(0, 212, 255, 0.02) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 16px;
+  z-index: 0;
+}
+
+.toolSection:hover::before {
+  opacity: 1;
+}
+
+.toolSection:hover {
+  transform: translateY(-6px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(0, 112, 243, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 112, 243, 0.3);
+}
+
+.toolSection > * {
+  position: relative;
+  z-index: 1;
 }
 
 .toolSection h2 {
   margin-top: 0;
 }
+
+/* Phase Cards Grid */
 
 /* Phase Cards Grid */
 .phasesGrid {
@@ -453,22 +490,52 @@
 .calculateBtn {
   position: relative;
   overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
 }
 
 .calculateBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+  z-index: 1;
+}
+
+.calculateBtn:hover::before {
+  left: 100%;
+}
+
+.calculateBtn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 112, 243, 0.3), 0 0 0 1px rgba(0, 112, 243, 0.1);
+  background: linear-gradient(135deg, var(--accent, #0070f3) 0%, #00d4ff 100%);
+}
+
+.calculateBtn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 4px 12px rgba(0, 112, 243, 0.2);
+}
+
+.calculateBtn::after {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
   width: 0;
   height: 0;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   transition: width 0.4s, height 0.4s;
   transform: translate(-50%, -50%);
+  z-index: 0;
 }
 
-.calculateBtn:active::before {
+.calculateBtn:active::after {
   width: 300px;
   height: 300px;
 }
@@ -480,9 +547,7 @@
   100% { transform: scale(1); }
 }
 
-.toolSection:hover {
-  animation: pulse 2s infinite;
-}
+/* Progress bar animation */
 
 /* Progress bar animation */
 @keyframes fillProgress {

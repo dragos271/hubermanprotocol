@@ -17,22 +17,52 @@ export default function HomePage() {
     <>
       <Header />
 
-      <main className="container">
+      <main className="container" style={{ marginTop: '70px' }}>
         {/* HERO */}
         <section className={styles.hero}>
           <FadeIn>
-            <h1 className={styles.title}>Science-Based Systems for the Brain & Body</h1>
+            <div className={styles.heroContent}>
+              <h1 className={styles.title}>
+                Science-Based Systems for 
+                <span className={styles.titleGradient}> Peak Performance</span>
+              </h1>
+            </div>
           </FadeIn>
           <FadeIn delay={0.05}>
             <p className={styles.subtitle}>
-              A framework built on validated neuroscience to regulate sleep, stress,
-              focus, and recovery — inspired by Dr. Andrew Huberman and supported by current research.
+              Transform your biology with evidence-based protocols. Optimize sleep, stress, focus, and recovery 
+              using neuroscience insights from Dr. Andrew Huberman&apos;s research — no guesswork, just results.
             </p>
           </FadeIn>
           <FadeIn delay={0.1}>
+            <div className={styles.heroStats}>
+              <div className={styles.stat}>
+                <div className={styles.statNumber}>5</div>
+                <div className={styles.statLabel}>Core Pillars</div>
+              </div>
+              <div className={styles.stat}>
+                <div className={styles.statNumber}>24/7</div>
+                <div className={styles.statLabel}>Protocol Tracking</div>
+              </div>
+              <div className={styles.stat}>
+                <div className={styles.statNumber}>100+</div>
+                <div className={styles.statLabel}>Research Studies</div>
+              </div>
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.15}>
             <div className={styles.ctas}>
-              <a href="/daily" className={styles.buttonPrimary}>Start Daily Protocol</a>
-              <a href="#pillars" className={styles.buttonGhost}>Learn the Science</a>
+              <a href="/daily" className={styles.buttonPrimary}>
+                <span>🚀 Start Your Protocol</span>
+              </a>
+              <a href="/visualizations" className={styles.buttonSecondary}>
+                <span>🧬 Explore Science</span>
+              </a>
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.2}>
+            <div className={styles.heroTrust}>
+              <p>Trusted by biohackers, athletes, and professionals worldwide</p>
             </div>
           </FadeIn>
         </section>
@@ -82,120 +112,166 @@ export default function HomePage() {
             ))}
           </div>
         </section>
-{/* PROTOCOL LIBRARY (actionable) */}
-<section className={styles.library}>
-  <h2>Protocol Library (Do These Today)</h2>
-  <div className={styles.protoGrid}>
 
-    {/* SLEEP */}
-    <article id="sleep" className={styles.proto}>
-      <h3>Sleep Protocol</h3>
-      <p>Anchor circadian rhythm and reduce sleep latency.</p>
-      <ul>
-        <li>🌅 <strong>Morning light:</strong> 10–30 min outdoors within 60 min of waking.</li>
-        <li>☕ <strong>Caffeine cutoff:</strong> ~8–10 hours before intended sleep.</li>
-        <li>🕯️ <strong>Evening dim:</strong> 90 min before bed, reduce bright screens; use warm/low lights.</li>
-        <li>❄️ <strong>Cool, dark room:</strong> ~18–20 °C; blackout and quiet if possible.</li>
-        <li>🧘 <strong>NSDR:</strong> 10–20 min on low-sleep days to restore alertness.</li>
-      </ul>
-      <p className={styles.smallNote}>Why it works: light → ipRGCs → SCN entrainment; dim evenings support melatonin.</p>
-    </article>
+        {/* READY TO TRANSFORM SECTION - Enhanced and Expanded */}
+        <FadeIn>
+          <section className={styles.transformSection}>
+            <div className={styles.transformContent}>
+              <div className={styles.transformHeader}>
+                <div className={styles.transformIcon}>🎯</div>
+                <h2>Ready to Transform Your Biology?</h2>
+                <p className={styles.transformSubtitle}>
+                  Stop guessing and start optimizing. Get personalized, step-by-step guidance through 
+                  evidence-based protocols that work with your natural physiology.
+                </p>
+              </div>
 
-    {/* STRESS */}
-    <article id="stress" className={styles.proto}>
-      <h3>Stress Regulation</h3>
-      <p>Rapid state control via breath + deliberate recovery.</p>
-      <ul>
-        <li>💨 <strong>Physiological sigh:</strong> 1× double nasal inhale + long exhale, 1–3 min during spikes.</li>
-        <li>🧘 <strong>NSDR/Yoga Nidra:</strong> 10–40 min to reduce cortisol and reset dopamine.</li>
-        <li>🚶 <strong>Walk:</strong> 10–20 min brisk walk, especially post-meal or during work breaks.</li>
-        <li>❄️ <strong>Optional cold:</strong> Short, safe cold exposure; end on cold for adaptation (screen for contraindications).</li>
-      </ul>
-      <p className={styles.smallNote}>Why it works: CO₂ offload + vagal tone shift; deliberate stress improves stress tolerance.</p>
-    </article>
+              <div className={styles.transformGrid}>
+                <div className={styles.transformCard}>
+                  <div className={styles.transformCardIcon}>🌅</div>
+                  <h3>Morning Optimization</h3>
+                  <p>Light exposure timing, caffeine protocols, and circadian entrainment</p>
+                  <div className={styles.transformBenefits}>
+                    <span>• Better sleep quality</span>
+                    <span>• Enhanced alertness</span>
+                    <span>• Improved mood</span>
+                  </div>
+                </div>
 
-    {/* FOCUS */}
-    <article id="focus" className={styles.proto}>
-      <h3>Focus & Productivity</h3>
-      <p>Structure dopamine and attention with timed effort/recovery.</p>
-      <ul>
-        <li>⏱️ <strong>90/20 cycles:</strong> Deep work 60–90 min → 10–20 min reset (walk, breath, eyes off screens).</li>
-        <li>☕ <strong>Caffeine timing:</strong> Use early day; avoid after midday if sleep is a goal.</li>
-        <li>🧘 <strong>NSDR after heavy learning:</strong> 10 min to consolidate memory.</li>
-        <li>🌅 <strong>Light + movement first:</strong> Set arousal before cognitive blocks.</li>
-      </ul>
-      <p className={styles.smallNote}>Why it works: controlled arousal windows + parasympathetic resets maintain performance.</p>
-    </article>
+                <div className={styles.transformCard}>
+                  <div className={styles.transformCardIcon}>🧠</div>
+                  <h3>Focus & Performance</h3>
+                  <p>90-minute work cycles, breathing protocols, and cognitive enhancement</p>
+                  <div className={styles.transformBenefits}>
+                    <span>• Deeper focus</span>
+                    <span>• Better productivity</span>
+                    <span>• Reduced mental fatigue</span>
+                  </div>
+                </div>
 
-    {/* RECOVERY */}
-    <article id="recovery" className={styles.proto}>
-      <h3>Recovery & Resilience</h3>
-      <p>Intentional down-regulation to improve baseline.</p>
-      <ul>
-        <li>🧘 <strong>NSDR:</strong> 10–30 min on high-stress or low-sleep days.</li>
-        <li>💨 <strong>Downshift breathing:</strong> slow nasal exhales (e.g., 4–6 breaths/min for 5 min).</li>
-        <li>🌙 <strong>Evening routine:</strong> dim environment, low stimulation, consistent sleep window.</li>
-        <li>📓 <strong>Gratitude:</strong> 2–3 min, specific and other-focused (pro-social bias).</li>
-      </ul>
-      <p className={styles.smallNote}>Why it works: parasympathetic activation restores dopaminergic tone and sleep readiness.</p>
-    </article>
+                <div className={styles.transformCard}>
+                  <div className={styles.transformCardIcon}>🧘</div>
+                  <h3>Stress & Recovery</h3>
+                  <p>NSDR sessions, breathwork techniques, and nervous system regulation</p>
+                  <div className={styles.transformBenefits}>
+                    <span>• Lower stress levels</span>
+                    <span>• Faster recovery</span>
+                    <span>• Better resilience</span>
+                  </div>
+                </div>
 
-    {/* NUTRITION */}
-    <article id="nutrition" className={styles.proto}>
-      <h3>Nutrition & Movement</h3>
-      <p>Stable energy, better glucose control, mitochondrial health.</p>
-      <ul>
-        <li>🥚 <strong>Protein target:</strong> ~1.6–2.2 g/kg per body weight/day , spread across meals.</li>
-        <li>🚶 <strong>Post-meal walk:</strong> 10–15 min to blunt glucose spikes.</li>
-        <li>🚴 <strong>Zone 2:</strong> 150–180 min/week conversation-pace cardio; add 2–3 short HIIT bouts.</li>
-        <li>🕰️ <strong>Feeding window:</strong> 12–16 h daily if appropriate; finish eating 2–3 h before bed.</li>
-        <li>🧂 <strong>Hydration & electrolytes:</strong> especially with fasts or training.</li>
-      </ul>
-      <p className={styles.smallNote}>Why it works: better glycemic control and aerobic base support brain & body performance.</p>
-    </article>
+                <div className={styles.transformCard}>
+                  <div className={styles.transformCardIcon}>🌙</div>
+                  <h3>Sleep Excellence</h3>
+                  <p>Evening routines, temperature optimization, and sleep hygiene</p>
+                  <div className={styles.transformBenefits}>
+                    <span>• Faster sleep onset</span>
+                    <span>• Deeper rest</span>
+                    <span>• Morning energy</span>
+                  </div>
+                </div>
+              </div>
 
-  </div>
-</section>
+              <div className={styles.transformCTA}>
+                <div className={styles.transformButtons}>
+                  <a href="/daily" className={styles.buttonPrimaryLarge}>
+                    <span>🚀 Start Your Daily Protocol</span>
+                  </a>
+                  <a href="/visualizations" className={styles.buttonSecondaryLarge}>
+                    <span>🔬 Explore Science Visualizations</span>
+                  </a>
+                </div>
+                
+                <div className={styles.transformStats}>
+                  <div className={styles.transformStat}>
+                    <div className={styles.transformStatNumber}>5min</div>
+                    <div className={styles.transformStatLabel}>Daily setup</div>
+                  </div>
+                  <div className={styles.transformStat}>
+                    <div className={styles.transformStatNumber}>100%</div>
+                    <div className={styles.transformStatLabel}>Science-backed</div>
+                  </div>
+                  <div className={styles.transformStat}>
+                    <div className={styles.transformStatNumber}>24/7</div>
+                    <div className={styles.transformStatLabel}>Optimization</div>
+                  </div>
+                </div>
+
+                <p className={styles.transformNote}>
+                  Join thousands optimizing their biology with Huberman protocols
+                </p>
+              </div>
+            </div>
+          </section>
+        </FadeIn>
 
         {/* INTERACTIVE VISUALIZATIONS */}
         <section className={styles.visualizations}>
           <FadeIn><h2>Interactive Science Visualizations</h2></FadeIn>
           <FadeIn delay={0.05}>
-            <p>Explore how protocols affect your biology in real-time</p>
+            <p className={styles.sectionSubtitle}>
+              Explore how protocols affect your biology in real-time with interactive neuroscience tools
+            </p>
           </FadeIn>
           
-          <div className={styles.visualGrid}>
-            <FadeIn delay={0.1}>
-              <div className={styles.visualCard}>
-                <CircadianWheel />
+          <FadeIn delay={0.1}>
+            <div className={styles.visualPreview}>
+              <div className={styles.visualPreviewCards}>
+                <div className={styles.previewCard}>
+                  <div className={styles.previewHeader}>
+                    <div className={styles.previewIcon}>🌍</div>
+                    <div className={styles.previewBadge}>Real-time</div>
+                  </div>
+                  <h3>Circadian Rhythm Wheel</h3>
+                  <p>Track your optimal daily rhythm and get personalized protocol recommendations based on your current time</p>
+                  <div className={styles.previewFeatures}>
+                    <span>• Live clock integration</span>
+                    <span>• Protocol timing</span>
+                    <span>• Sleep optimization</span>
+                  </div>
+                </div>
+                
+                <div className={styles.previewCard}>
+                  <div className={styles.previewHeader}>
+                    <div className={styles.previewIcon}>🧠</div>
+                    <div className={styles.previewBadge}>Interactive</div>
+                  </div>
+                  <h3>Body Systems Map</h3>
+                  <p>Discover how Huberman protocols enhance different organ systems and understand the science behind each benefit</p>
+                  <div className={styles.previewFeatures}>
+                    <span>• 6 key body systems</span>
+                    <span>• Protocol benefits</span>
+                    <span>• Scientific explanations</span>
+                  </div>
+                </div>
+                
+                <div className={styles.previewCard}>
+                  <div className={styles.previewHeader}>
+                    <div className={styles.previewIcon}>⚡</div>
+                    <div className={styles.previewBadge}>Dynamic</div>
+                  </div>
+                  <h3>Neurotransmitter Balance</h3>
+                  <p>Understand how brain chemicals fluctuate throughout the day and optimize them with targeted interventions</p>
+                  <div className={styles.previewFeatures}>
+                    <span>• 24-hour tracking</span>
+                    <span>• Chemical interactions</span>
+                    <span>• Optimization tips</span>
+                  </div>
+                </div>
               </div>
-            </FadeIn>
-            
-            <FadeIn delay={0.15}>
-              <div className={styles.visualCard}>
-                <BodySystemDiagram />
+              
+              <div className={styles.visualsCTA}>
+                <a href="/visualizations" className={styles.buttonPrimaryLarge}>
+                  <span>🔬 Explore All Visualizations</span>
+                  <span className={styles.buttonArrow}>→</span>
+                </a>
+                <p className={styles.visualsNote}>
+                  Interactive tools to understand and optimize your biology
+                </p>
               </div>
-            </FadeIn>
-          </div>
-          
-          <FadeIn delay={0.2}>
-            <div className={styles.visualCardFull}>
-              <NeurotransmitterBalance />
             </div>
           </FadeIn>
         </section>
-
-        {/* CTA */}
-        <FadeIn>
-          <section className={styles.ctaBlock}>
-            <h2>Start Your Daily Neuroscience System</h2>
-            <p>
-              Move from knowledge to action. The Daily page guides you step-by-step through
-              morning light, breathing, NSDR, and sleep planning.
-            </p>
-            <a href="/daily" className={styles.buttonPrimaryLarge}>Begin My Day →</a>
-          </section>
-        </FadeIn>
       </main>
 
       <Footer />

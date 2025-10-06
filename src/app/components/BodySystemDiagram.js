@@ -8,200 +8,358 @@ export default function BodySystemDiagram() {
     {
       id: 'brain',
       name: 'Nervous System',
-      position: { x: 150, y: 40 },
       color: '#8B5CF6',
-      effects: ['Improved focus', 'Better memory', 'Reduced anxiety', 'Enhanced neuroplasticity']
+      icon: '🧠',
+      description: 'Central command center for cognitive function and neural health',
+      effects: ['Enhanced focus & concentration', 'Improved memory consolidation', 'Reduced anxiety & stress', 'Increased neuroplasticity']
     },
     {
       id: 'heart',
       name: 'Cardiovascular',
-      position: { x: 150, y: 120 },
       color: '#EF4444',
-      effects: ['Lower resting heart rate', 'Better HRV', 'Improved circulation', 'Lower blood pressure']
+      icon: '❤️',
+      description: 'Heart and circulatory system optimization',
+      effects: ['Lower resting heart rate', 'Improved heart rate variability', 'Enhanced circulation', 'Optimized blood pressure']
     },
     {
       id: 'lungs',
       name: 'Respiratory',
-      position: { x: 130, y: 110 },
       color: '#06B6D4',
-      effects: ['Enhanced oxygen uptake', 'Better breath control', 'Improved CO2 tolerance', 'Stress relief']
+      icon: '🫁',
+      description: 'Breathing and oxygen delivery systems',
+      effects: ['Enhanced oxygen uptake', 'Better breath control', 'Improved CO2 tolerance', 'Stress relief through breathing']
     },
     {
       id: 'stomach',
       name: 'Digestive',
-      position: { x: 160, y: 160 },
       color: '#10B981',
-      effects: ['Better gut health', 'Improved metabolism', 'Enhanced nutrient absorption', 'Reduced inflammation']
+      icon: '🟢',
+      description: 'Gut health and metabolic optimization',
+      effects: ['Improved gut microbiome', 'Enhanced metabolism', 'Better nutrient absorption', 'Reduced inflammation']
     },
     {
       id: 'muscles',
       name: 'Muscular',
-      position: { x: 100, y: 140 },
       color: '#F59E0B',
-      effects: ['Increased strength', 'Better recovery', 'Enhanced endurance', 'Improved flexibility']
+      icon: '💪',
+      description: 'Muscle strength and recovery systems',
+      effects: ['Increased strength & power', 'Faster recovery time', 'Enhanced endurance', 'Improved flexibility']
     },
     {
       id: 'immune',
       name: 'Immune System',
-      position: { x: 200, y: 140 },
       color: '#EC4899',
-      effects: ['Stronger immunity', 'Faster healing', 'Reduced inflammation', 'Better stress response']
+      icon: '🛡️',
+      description: 'Body defense and healing mechanisms',
+      effects: ['Stronger immune response', 'Faster healing & recovery', 'Reduced systemic inflammation', 'Better stress adaptation']
     }
   ];
 
   return (
-    <div style={{ 
-      padding: '20px',
-      width: '100%',
-      maxWidth: '500px',
+    <div style={{
+      padding: '32px',
+      background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(30, 41, 59, 0.4) 100%)',
+      borderRadius: '24px',
+      border: '1px solid rgba(255, 255, 255, 0.08)',
+      backdropFilter: 'blur(40px)',
+      boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+      maxWidth: '800px',
       margin: '0 auto'
     }}>
+      {/* Title */}
       <h3 style={{ 
-        marginBottom: '20px', 
-        color: 'var(--text)',
-        fontSize: '18px',
-        fontWeight: '600',
-        textAlign: 'center'
+        color: 'var(--text)', 
+        marginBottom: '32px',
+        fontSize: '28px',
+        fontWeight: '700',
+        textAlign: 'center',
+        background: 'linear-gradient(135deg, #8B5CF6, #EF4444, #06B6D4, #10B981)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        backgroundClip: 'text',
+        letterSpacing: '-0.02em'
       }}>
         Protocol Impact on Body Systems
       </h3>
-      
-      <div style={{ 
-        position: 'relative',
-        width: '300px',
-        height: '250px',
-        margin: '0 auto 20px',
-        border: '2px solid var(--border)',
-        borderRadius: '12px',
-        backgroundColor: 'rgba(15, 23, 42, 0.5)',
-        overflow: 'hidden'
-      }}>
-        <svg width="300" height="250" viewBox="0 0 300 250" style={{ width: '100%', height: '100%' }}>
-          {/* Simple body outline */}
-          <g stroke="var(--muted)" strokeWidth="2" fill="none">
-            {/* Head */}
-            <circle cx="150" cy="40" r="25" />
-            {/* Torso */}
-            <rect x="125" y="65" width="50" height="80" rx="10" />
-            {/* Arms */}
-            <rect x="95" y="75" width="25" height="60" rx="12" />
-            <rect x="180" y="75" width="25" height="60" rx="12" />
-            {/* Legs */}
-            <rect x="135" y="145" width="15" height="70" rx="7" />
-            <rect x="155" y="145" width="15" height="70" rx="7" />
-          </g>
 
-          {/* System markers */}
-          {systems.map((system) => (
-            <g key={system.id}>
-              <circle
-                cx={system.position.x}
-                cy={system.position.y}
-                r="8"
-                fill={system.color}
-                stroke="white"
-                strokeWidth="2"
-                style={{ 
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: selectedSystem ? '1fr 1fr' : '1fr',
+        gap: '32px',
+        alignItems: 'start'
+      }}>
+        {/* Systems Grid */}
+        <div>
+          <p style={{
+            color: 'rgba(255, 255, 255, 0.7)',
+            fontSize: '16px',
+            textAlign: 'center',
+            marginBottom: '24px',
+            fontWeight: '500'
+          }}>
+            Click on a system to explore protocol benefits
+          </p>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: '16px'
+          }}>
+            {systems.map((system) => (
+              <button
+                key={system.id}
+                style={{
+                  background: selectedSystem === system.id 
+                    ? `linear-gradient(135deg, ${system.color}25, ${system.color}15)` 
+                    : 'rgba(255, 255, 255, 0.04)',
+                  border: selectedSystem === system.id 
+                    ? `2px solid ${system.color}` 
+                    : '2px solid rgba(255, 255, 255, 0.08)',
+                  borderRadius: '20px',
+                  padding: '20px',
+                  color: 'var(--text)',
                   cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  transform: selectedSystem === system.id ? 'scale(1.3)' : 'scale(1)'
+                  transition: 'all 0.3s ease',
+                  fontFamily: 'inherit',
+                  textAlign: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '12px',
+                  transform: selectedSystem === system.id ? 'translateY(-2px) scale(1.02)' : 'translateY(0)',
+                  boxShadow: selectedSystem === system.id 
+                    ? `0 12px 32px ${system.color}30` 
+                    : '0 4px 16px rgba(0, 0, 0, 0.1)',
+                  backdropFilter: 'blur(20px)',
+                  minHeight: '140px'
                 }}
                 onClick={() => setSelectedSystem(selectedSystem === system.id ? null : system.id)}
-              />
-              {/* System label */}
-              <text
-                x={system.position.x}
-                y={system.position.y + 25}
-                textAnchor="middle"
-                fill="var(--text)"
-                fontSize="10"
-                fontWeight="500"
-                style={{ pointerEvents: 'none' }}
+                onMouseEnter={(e) => {
+                  if (selectedSystem !== system.id) {
+                    e.target.style.background = 'rgba(255, 255, 255, 0.08)';
+                    e.target.style.transform = 'translateY(-1px)';
+                    e.target.style.boxShadow = `0 8px 24px ${system.color}20`;
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (selectedSystem !== system.id) {
+                    e.target.style.background = 'rgba(255, 255, 255, 0.04)';
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.1)';
+                  }
+                }}
               >
-                {system.name.split(' ')[0]}
-              </text>
-            </g>
-          ))}
-        </svg>
+                <div style={{
+                  width: '60px',
+                  height: '60px',
+                  borderRadius: '50%',
+                  background: `linear-gradient(135deg, ${system.color}, ${system.color}CC)`,
+                  boxShadow: `0 8px 24px ${system.color}40`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '28px',
+                  flexShrink: 0,
+                  border: '2px solid rgba(255, 255, 255, 0.2)'
+                }}>
+                  {system.icon}
+                </div>
+                
+                <div>
+                  <h4 style={{
+                    fontSize: '16px',
+                    fontWeight: '700',
+                    margin: '0 0 4px 0',
+                    letterSpacing: '-0.01em',
+                    color: selectedSystem === system.id ? system.color : 'var(--text)'
+                  }}>
+                    {system.name}
+                  </h4>
+                  <p style={{
+                    fontSize: '12px',
+                    color: 'rgba(255, 255, 255, 0.7)',
+                    margin: 0,
+                    lineHeight: '1.4',
+                    fontWeight: '400'
+                  }}>
+                    {system.description}
+                  </p>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
 
-        {/* Selected system overlay */}
+        {/* Selected System Benefits */}
         {selectedSystem && (
           <div style={{
-            position: 'absolute',
-            top: '10px',
-            right: '10px',
-            background: 'rgba(0, 0, 0, 0.9)',
-            color: 'white',
-            padding: '12px',
-            borderRadius: '8px',
-            maxWidth: '180px',
-            fontSize: '12px',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)'
+            background: `linear-gradient(135deg, ${systems.find(s => s.id === selectedSystem)?.color}20, ${systems.find(s => s.id === selectedSystem)?.color}10)`,
+            border: `2px solid ${systems.find(s => s.id === selectedSystem)?.color}50`,
+            borderRadius: '24px',
+            padding: '24px',
+            backdropFilter: 'blur(20px)',
+            boxShadow: `0 16px 40px ${systems.find(s => s.id === selectedSystem)?.color}25`,
+            animation: 'fadeInBenefit 0.4s ease-out',
+            position: 'sticky',
+            top: '20px'
           }}>
-            <div style={{ 
-              fontWeight: '600', 
-              marginBottom: '8px',
-              color: systems.find(s => s.id === selectedSystem)?.color 
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '16px',
+              marginBottom: '20px'
             }}>
-              {systems.find(s => s.id === selectedSystem)?.name}
+              <div style={{
+                width: '56px',
+                height: '56px',
+                borderRadius: '50%',
+                background: `linear-gradient(135deg, ${systems.find(s => s.id === selectedSystem)?.color}, ${systems.find(s => s.id === selectedSystem)?.color}CC)`,
+                boxShadow: `0 8px 24px ${systems.find(s => s.id === selectedSystem)?.color}50`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '24px',
+                border: '2px solid rgba(255, 255, 255, 0.2)'
+              }}>
+                {systems.find(s => s.id === selectedSystem)?.icon}
+              </div>
+              
+              <div>
+                <h4 style={{
+                  color: 'var(--text)',
+                  fontSize: '20px',
+                  fontWeight: '700',
+                  margin: '0 0 4px 0',
+                  letterSpacing: '-0.02em'
+                }}>
+                  {systems.find(s => s.id === selectedSystem)?.name}
+                </h4>
+                <p style={{
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  fontSize: '14px',
+                  margin: 0,
+                  fontWeight: '500'
+                }}>
+                  Protocol Benefits
+                </p>
+              </div>
             </div>
-            <ul style={{ margin: 0, paddingLeft: '16px' }}>
-              {systems.find(s => s.id === selectedSystem)?.effects.map((effect, i) => (
-                <li key={i} style={{ marginBottom: '4px' }}>{effect}</li>
-              ))}
-            </ul>
+
+            <p style={{
+              color: 'rgba(255, 255, 255, 0.9)',
+              fontSize: '15px',
+              lineHeight: '1.5',
+              marginBottom: '20px',
+              fontWeight: '500'
+            }}>
+              {systems.find(s => s.id === selectedSystem)?.description}
+            </p>
+
+            <div>
+              <h5 style={{
+                color: 'var(--text)',
+                fontSize: '14px',
+                fontWeight: '700',
+                marginBottom: '12px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px'
+              }}>
+                Key Benefits
+              </h5>
+              <div style={{
+                display: 'grid',
+                gap: '10px'
+              }}>
+                {systems.find(s => s.id === selectedSystem)?.effects.map((effect, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.08)',
+                      padding: '12px 16px',
+                      borderRadius: '14px',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      backdropFilter: 'blur(10px)',
+                      transition: 'all 0.2s ease',
+                      cursor: 'default'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.background = 'rgba(255, 255, 255, 0.12)';
+                      e.target.style.transform = 'translateX(4px)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.background = 'rgba(255, 255, 255, 0.08)';
+                      e.target.style.transform = 'translateX(0)';
+                    }}
+                  >
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px'
+                    }}>
+                      <div style={{
+                        width: '8px',
+                        height: '8px',
+                        borderRadius: '50%',
+                        background: systems.find(s => s.id === selectedSystem)?.color,
+                        boxShadow: `0 0 12px ${systems.find(s => s.id === selectedSystem)?.color}80`
+                      }} />
+                      <span style={{
+                        color: 'var(--text)',
+                        fontSize: '14px',
+                        fontWeight: '500',
+                        lineHeight: '1.4'
+                      }}>
+                        {effect}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
       </div>
 
-      {/* System legend */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
-        gap: '8px',
-        fontSize: '12px'
-      }}>
-        {systems.map((system) => (
-          <div 
-            key={system.id} 
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '8px',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              backgroundColor: selectedSystem === system.id ? 'rgba(139, 92, 246, 0.1)' : 'transparent',
-              border: selectedSystem === system.id ? '1px solid rgba(139, 92, 246, 0.3)' : '1px solid transparent',
-              transition: 'all 0.2s ease'
-            }}
-            onClick={() => setSelectedSystem(selectedSystem === system.id ? null : system.id)}
-          >
-            <div style={{
-              width: '12px',
-              height: '12px',
-              borderRadius: '50%',
-              backgroundColor: system.color,
-              border: '2px solid white',
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
-            }} />
-            <span style={{ color: 'var(--text)', fontWeight: '500' }}>
-              {system.name}
-            </span>
-          </div>
-        ))}
-      </div>
-
+      {/* Instruction text when no system selected */}
       {!selectedSystem && (
-        <p style={{ 
-          textAlign: 'center', 
-          color: 'var(--muted)', 
-          fontSize: '12px', 
-          marginTop: '12px',
-          fontStyle: 'italic'
+        <div style={{
+          textAlign: 'center',
+          marginTop: '32px',
+          padding: '24px',
+          background: 'rgba(255, 255, 255, 0.04)',
+          borderRadius: '16px',
+          border: '1px solid rgba(255, 255, 255, 0.08)'
         }}>
-          Click on a system to see protocol benefits
-        </p>
+          <div style={{
+            width: '64px',
+            height: '64px',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #8B5CF6, #EF4444)',
+            margin: '0 auto 16px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '24px'
+          }}>
+            🎯
+          </div>
+          <h4 style={{
+            color: 'var(--text)',
+            fontSize: '18px',
+            fontWeight: '600',
+            marginBottom: '8px'
+          }}>
+            Explore System Benefits
+          </h4>
+          <p style={{
+            color: 'var(--muted)',
+            fontSize: '14px',
+            margin: 0,
+            lineHeight: '1.5'
+          }}>
+            Select any body system above to discover how Huberman protocols enhance your health and performance.
+          </p>
+        </div>
       )}
     </div>
   );

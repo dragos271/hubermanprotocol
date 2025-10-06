@@ -29,3 +29,15 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto;
   padding: 0 24px;
 }
+
+/* Keyframe animations */
+@keyframes fadeInBenefit {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

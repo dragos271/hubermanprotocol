@@ -297,37 +297,6 @@ export default function EnhancedSectionCard({ title, description, icon, children
         </motion.div>
       </div>
 
-      {/* Hover particles effect */}
-      {isHovered && (
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              style={{
-                position: 'absolute',
-                width: '4px',
-                height: '4px',
-                borderRadius: '50%',
-                background: 'rgba(139, 92, 246, 0.6)',
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`
-              }}
-              animate={{
-                y: [-20, -40],
-                opacity: [0, 1, 0],
-                scale: [0, 1, 0]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                delay: i * 0.5,
-                ease: "easeOut"
-              }}
-            />
-          ))}
-        </div>
-      )}
-
       {/* Success sound effect simulation */}
       {isCompleted && (
         <audio autoPlay>
