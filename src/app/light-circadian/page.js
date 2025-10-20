@@ -1,359 +1,321 @@
+import { FadeIn, FadeInScale } from "../components/Motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { FadeIn, FadeInScale } from "../components/Motion";
-import styles from "./page.module.css";
+import TopicLayout from "../components/TopicLayout";
+import styles from "../styles/topicDetail.module.css";
 
 export const metadata = {
-  title: "Light Exposure and Circadian Rhythm – Huberman Protocol",
-  description: "Master your biological clock with science-based light protocols for optimal sleep, energy, and health.",
+  title: "Light Exposure & Circadian Rhythm – Huberman Protocol",
+  description:
+    "Use strategic light timing to align your circadian clock for better sleep, energy, and mood.",
 };
+
+const heroStats = [
+  { value: "10k+", label: "Lux Morning Target" },
+  { value: "1-2", label: "Hours Shiftable/Day" },
+  { value: "3-7", label: "Days to Reset" },
+];
 
 const lightProtocols = [
   {
-    title: "Morning Light Exposure",
     icon: "🌅",
-    timing: "Within 30-60 minutes of waking",
-    description: "Set your circadian clock with bright light to optimize alertness and sleep timing",
+    timing: "Within 60 min wake",
+    title: "Morning Light",
+    description:
+      "Trigger cortisol pulse and anchor circadian rhythm with bright outdoor light.",
     actions: [
-      "Get 10-30 minutes of bright light exposure (10,000+ lux)",
-      "Face east toward the rising sun if possible",
-      "Avoid sunglasses and windows for maximum effect",
-      "On cloudy days, increase exposure time to 30-60 minutes"
+      "10–30 minutes outside facing sun",
+      "Skip sunglasses and windows if safe",
+      "Extend to 30–60 minutes on cloudy days",
+      "Pair with light movement",
     ],
-    science: "Morning light exposure triggers cortisol release and sets the circadian clock in the suprachiasmatic nucleus, establishing when you&apos;ll feel alert and sleepy throughout the day."
+    science:
+      "ipRGCs signal the SCN, setting your 24-hour clock and influencing nighttime melatonin.",
   },
   {
-    title: "Afternoon Light Top-Up",
     icon: "☀️",
-    timing: "Late afternoon (4-6 PM)",
-    description: "Reinforce circadian rhythms and improve sleep quality with afternoon light",
+    timing: "Late afternoon",
+    title: "Afternoon Top-Up",
+    description:
+      "A second bout reinforces circadian amplitude and offsets delayed bedtime cravings.",
     actions: [
-      "Get 10-20 minutes of bright light exposure",
-      "Focus on low-angle afternoon sun when possible",
-      "Can be combined with outdoor exercise or walking",
-      "Helps offset potential circadian drift"
+      "Spend 10–20 minutes outdoors",
+      "Aim for low-angle sun (4–6 p.m.)",
+      "Combine with walk or workout",
+      "Helps shift workers maintain rhythm",
     ],
-    science: "Afternoon light exposure strengthens circadian amplitude and can advance sleep timing. It&apos;s particularly important for shift workers and those with delayed sleep phase."
+    science:
+      "Late-day light nudges the clock forward, improving sleep timing and mood.",
   },
   {
-    title: "Evening Light Management",
-    icon: "🌅",
-    timing: "2-3 hours before bed",
-    description: "Minimize light exposure to support natural melatonin production",
+    icon: "🌙",
+    timing: "2-3 h pre-bed",
+    title: "Evening Dimness",
+    description: "Reduce blue light to protect melatonin and sleep architecture.",
     actions: [
-      "Dim lights to 50% or less of daytime brightness",
-      "Use warm, red-tinted lights in evening",
-      "Avoid bright overhead lights",
-      "Set devices to night mode or use blue light blocking"
+      "Dim lights to <50% intensity",
+      "Switch to warm, red-tinted bulbs",
+      "Use night-shift on devices or blue blockers",
+      "Keep bedroom dark (mask/curtains)",
     ],
-    science: "Blue light suppresses melatonin production for 2-3 hours. Even small amounts of light can disrupt sleep quality and circadian timing."
+    science:
+      "Blue wavelengths suppress melatonin for hours, fragmenting deep and REM sleep.",
   },
   {
-    title: "Light Therapy for Shift Work",
     icon: "💡",
-    timing: "During desired alert periods",
-    description: "Use artificial light to shift circadian rhythms for non-traditional schedules",
+    timing: "Shift work",
+    title: "Light Therapy",
+    description: "Leverage artificial light to shift circadian phase when schedules rotate.",
     actions: [
-      "Use 10,000 lux light box during desired alert periods",
-      "Wear blue-light blocking glasses before desired sleep time",
-      "Create consistent light/dark cycles even with irregular work",
-      "Gradually shift light exposure timing over several days"
+      "Use 10,000 lux light box during desired alert period",
+      "Wear blue-blocking glasses before desired sleep",
+      "Maintain strict dark window for sleep",
+      "Shift exposure gradually over days",
     ],
-    science: "Controlled light exposure can shift circadian rhythms by up to 1-2 hours per day. This is the most effective non-pharmaceutical circadian intervention."
+    science:
+      "Controlled light can shift circadian phase 1–2 hours per day—most potent non-pharma tool.",
   },
   {
-    title: "Seasonal Light Adaptation",
     icon: "🍂",
-    timing: "Daily during darker months",
-    description: "Combat seasonal affective patterns with strategic light exposure",
+    timing: "Winter",
+    title: "Seasonal Adaptation",
+    description: "Increase light dose during darker months to prevent mood dips.",
     actions: [
-      "Increase morning light exposure duration in winter",
-      "Use 10,000 lux light therapy box for 20-30 minutes",
-      "Position light source 16-24 inches from face",
-      "Combine with outdoor time even on cloudy days"
+      "Extend morning exposure to 30–40 minutes",
+      "Use light therapy box (10,000 lux) for 20–30 minutes",
+      "Combine with outdoor time when possible",
+      "Maintain consistent schedule on weekends",
     ],
-    science: "Seasonal changes in light exposure can disrupt circadian rhythms and mood. Light therapy can be as effective as antidepressants for seasonal affective disorder."
+    science:
+      "Light therapy rivals antidepressants for seasonal affective disorder by normalizing circadian amplitude.",
   },
   {
-    title: "Travel and Jet Lag Protocols",
     icon: "✈️",
-    timing: "Before, during, and after travel",
-    description: "Minimize jet lag and speed circadian adaptation with strategic light timing",
+    timing: "Travel",
+    title: "Jet Lag Strategy",
+    description: "Use timed light to align with destination quickly.",
     actions: [
-      "Pre-shift circadian rhythm 2-3 days before travel",
-      "Seek light during destination morning hours",
-      "Avoid light during destination nighttime",
-      "Use melatonin and light therapy in combination"
+      "Pre-shift schedule 2–3 days before trip",
+      "Seek destination morning light immediately",
+      "Avoid light during destination night (glasses/eye mask)",
+      "Pair with low-dose melatonin if approved",
     ],
-    science: "Light is the most powerful circadian zeitgeber. Strategic light exposure can reduce jet lag recovery time from 1 day per time zone to 1-2 days total."
-  }
+    science:
+      "Strategic light reduces jet lag recovery from ~1 day per time zone to a couple of days.",
+  },
 ];
 
 const lightSources = [
   {
-    source: "Natural Sunlight",
-    intensity: "10,000-100,000+ lux",
-    benefits: "Full spectrum, free, vitamin D production",
-    considerations: "Weather dependent, UV exposure"
+    name: "Natural Sunlight",
+    intensity: "10,000–100,000+ lux",
+    benefits: "Full spectrum, vitamin D, free",
+    considerations: "Weather dependent, UV exposure",
   },
   {
-    source: "Light Therapy Box",
+    name: "Light Therapy Box",
     intensity: "10,000 lux",
-    benefits: "Consistent, controllable, weather independent",
-    considerations: "Cost, requires daily use"
+    benefits: "Consistent, controllable",
+    considerations: "Cost, requires positioning 16–24 in. from face",
   },
   {
-    source: "Dawn Simulation Alarm",
-    intensity: "100-300 lux gradual",
-    benefits: "Gentle waking, convenient, consistent",
-    considerations: "Lower intensity, not sufficient alone"
+    name: "Dawn Simulator",
+    intensity: "100–300 lux",
+    benefits: "Gentle wake, circadian cue",
+    considerations: "Low intensity—pair with morning outdoor light",
   },
   {
-    source: "Red Light Therapy",
+    name: "Red Light",
     intensity: "Variable",
-    benefits: "No circadian disruption, may aid recovery",
-    considerations: "Limited circadian benefits"
-  }
+    benefits: "Minimal circadian disruption",
+    considerations: "Limited clock-shifting power",
+  },
 ];
 
-const circadianDisruptors = [
+const disruptors = [
   {
     title: "Blue Light at Night",
-    impact: "Suppresses melatonin for 2-3 hours",
+    impact: "Suppresses melatonin for 2–3 hours",
     solutions: [
-      "Use blue light blocking glasses 2-3 hours before bed",
-      "Install f.lux or similar software on devices",
-      "Switch to warm, dim lighting in evening",
-      "Use red light for nighttime activities"
-    ]
+      "Use blue blockers in evening",
+      "Install f.lux/Night Shift",
+      "Switch to warm lamps",
+      "Reserve red light for late tasks",
+    ],
   },
   {
     title: "Irregular Sleep Schedule",
-    impact: "Weakens circadian amplitude and timing",
+    impact: "Weakens circadian amplitude",
     solutions: [
-      "Maintain consistent sleep/wake times ±30 minutes",
-      "Use light exposure to reinforce desired timing",
-      "Avoid social jet lag on weekends",
-      "Gradually shift schedule if changes needed"
-    ]
+      "Stick to ±30 minute schedule",
+      "Use morning light to reinforce timing",
+      "Reduce weekend social jet lag",
+      "Shift gradually if change needed",
+    ],
   },
   {
     title: "Insufficient Morning Light",
-    impact: "Delayed circadian phase, poor sleep onset",
+    impact: "Delays sleep onset, lowers energy",
     solutions: [
-      "Prioritize morning light exposure within 1 hour of waking",
-      "Use light therapy box if natural light unavailable",
-      "Exercise outdoors in morning when possible",
-      "Avoid sunglasses during morning light exposure"
-    ]
-  }
+      "Prioritize outdoor light within an hour of waking",
+      "Use light box when sun unavailable",
+      "Combine with morning exercise",
+      "Avoid sunglasses during exposure",
+    ],
+  },
 ];
 
 export default function LightCircadianPage() {
   return (
     <>
       <Header />
-      
-      <main className={styles.container}>
-        {/* HERO */}
-        <section className={styles.hero}>
+      <main className="container">
+        <TopicLayout
+          icon="☀️"
+          title="Light"
+          accent="Circadian"
+          subtitle="Align your biology with the sun using light timing, dimming, and therapy protocols."
+          stats={heroStats}
+        >
           <FadeIn>
-            <div className={styles.heroContent}>
-              <div className={styles.heroIcon}>☀️</div>
-              <h1 className={styles.title}>
-                Light & Circadian
-                <span className={styles.titleGradient}> Optimization</span>
-              </h1>
-              <p className={styles.subtitle}>
-                Master your biological clock with science-based light protocols that optimize sleep timing, 
-                energy levels, and overall health through circadian rhythm regulation.
-              </p>
-            </div>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Circadian Basics</h2>
+                <p className={styles.sectionSubtitle}>
+                  Light is the master zeitgeber for the suprachiasmatic nucleus. Morning photons set the clock, while evening darkness protects melatonin and sleep.
+                </p>
+              </div>
+              <div className={styles.sectionBody}>
+                <p>
+                  Build a light routine: bright mornings, reinforcing afternoon exposure, and dim evenings. If schedules shift, leverage light therapy boxes and blue blockers to move your internal clock deliberately.
+                </p>
+              </div>
+            </section>
           </FadeIn>
-          
+
           <FadeIn delay={0.1}>
-            <div className={styles.heroStats}>
-              <div className={styles.stat}>
-                <div className={styles.statNumber}>10,000+</div>
-                <div className={styles.statLabel}>Lux Morning Target</div>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Light Protocols</h2>
               </div>
-              <div className={styles.stat}>
-                <div className={styles.statNumber}>1-2</div>
-                <div className={styles.statLabel}>Hours Daily Shift Possible</div>
+              <div className={styles.protocolsGrid}>
+                {lightProtocols.map((protocol, index) => (
+                  <FadeInScale key={protocol.title} delay={index * 0.05}>
+                    <article className={styles.protocolCard}>
+                      <div className={styles.protocolHeader}>
+                        <div className={styles.protocolIcon}>{protocol.icon}</div>
+                        <div className={styles.protocolTiming}>{protocol.timing}</div>
+                      </div>
+                      <h3>{protocol.title}</h3>
+                      <p className={styles.protocolDescription}>{protocol.description}</p>
+                      <div className={styles.protocolActions}>
+                        <h4>Implementation</h4>
+                        <ul>
+                          {protocol.actions.map((action) => (
+                            <li key={action}>{action}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className={styles.protocolScience}>
+                        <h4>Why it works</h4>
+                        <p>{protocol.science}</p>
+                      </div>
+                    </article>
+                  </FadeInScale>
+                ))}
               </div>
-              <div className={styles.stat}>
-                <div className={styles.statNumber}>3-7</div>
-                <div className={styles.statLabel}>Days to Reset Rhythm</div>
-              </div>
-            </div>
-          </FadeIn>
-        </section>
-
-        {/* CORE SCIENCE */}
-        <section className={styles.scienceSection}>
-          <FadeIn>
-            <h2>The Science of Circadian Rhythms</h2>
-            <p className={styles.scienceText}>
-              Your circadian clock, located in the suprachiasmatic nucleus, controls when you feel alert 
-              and sleepy through hormone release and body temperature regulation. Light is the primary 
-              &quot;zeitgeber&quot; (time-giver) that sets this internal clock. By strategically timing light 
-              exposure, you can optimize sleep quality, energy levels, mood, and metabolic health. 
-              The timing, intensity, and color of light exposure determines its circadian effects.
-            </p>
-          </FadeIn>
-        </section>
-
-        {/* LIGHT PROTOCOLS */}
-        <section className={styles.protocolsSection}>
-          <FadeIn>
-            <h2>Light Exposure Protocols</h2>
-            <p className={styles.sectionSubtitle}>
-              Six evidence-based protocols for optimizing circadian rhythm through strategic light exposure
-            </p>
+            </section>
           </FadeIn>
 
-          <div className={styles.protocolsGrid}>
-            {lightProtocols.map((protocol, index) => (
-              <FadeInScale key={protocol.title} delay={index * 0.1}>
-                <div className={styles.protocolCard}>
-                  <div className={styles.protocolHeader}>
-                    <div className={styles.protocolIcon}>{protocol.icon}</div>
-                    <div className={styles.protocolTiming}>{protocol.timing}</div>
+          <FadeIn delay={0.2}>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Light Source Toolkit</h2>
+                <p className={styles.sectionSubtitle}>
+                  Mix natural and artificial sources to meet light targets year-round.
+                </p>
+              </div>
+              <div className={styles.resourceList}>
+                {lightSources.map((source) => (
+                  <div key={source.name} className={styles.resourceItem}>
+                    <strong>{source.name}</strong>
+                    <span>Intensity: {source.intensity}</span>
+                    <span>Benefits: {source.benefits}</span>
+                    <span>Considerations: {source.considerations}</span>
                   </div>
-                  
-                  <h3>{protocol.title}</h3>
-                  <p className={styles.protocolDescription}>{protocol.description}</p>
-                  
-                  <div className={styles.protocolActions}>
-                    <h4>Implementation:</h4>
-                    <ul>
-                      {protocol.actions.map((action, idx) => (
-                        <li key={idx}>{action}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  <div className={styles.protocolScience}>
-                    <h4>The Science:</h4>
-                    <p>{protocol.science}</p>
-                  </div>
-                </div>
-              </FadeInScale>
-            ))}
-          </div>
-        </section>
-
-        {/* LIGHT SOURCES */}
-        <section className={styles.supplementsSection}>
-          <FadeIn>
-            <h2>Light Sources & Tools</h2>
-            <p className={styles.sectionSubtitle}>
-              Different light sources for various circadian optimization needs
-            </p>
+                ))}
+              </div>
+            </section>
           </FadeIn>
 
-          <div className={styles.supplementsGrid}>
-            {lightSources.map((source, index) => (
-              <FadeInScale key={source.source} delay={index * 0.1}>
-                <div className={styles.supplementCard}>
-                  <div className={styles.supplementHeader}>
-                    <h3>{source.source}</h3>
-                    <div className={styles.supplementDosage}>{source.intensity}</div>
-                  </div>
-                  
-                  <div className={styles.supplementTiming}>
-                    <strong>Benefits:</strong> {source.benefits}
-                  </div>
-                  
-                  <div className={styles.supplementEvidence}>
-                    <strong>Considerations:</strong> {source.considerations}
-                  </div>
-                </div>
-              </FadeInScale>
-            ))}
-          </div>
-        </section>
-
-        {/* CIRCADIAN DISRUPTORS */}
-        <section className={styles.distractionsSection}>
-          <FadeIn>
-            <h2>Common Circadian Disruptors</h2>
-            <p className={styles.sectionSubtitle}>
-              Identify and eliminate factors that interfere with optimal circadian function
-            </p>
+          <FadeIn delay={0.3}>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Common Disruptors</h2>
+              </div>
+              <div className={styles.protocolsGrid}>
+                {disruptors.map((disruptor, index) => (
+                  <FadeInScale key={disruptor.title} delay={index * 0.05}>
+                    <article className={styles.protocolCard}>
+                      <h3>{disruptor.title}</h3>
+                      <p className={styles.protocolDescription}>{disruptor.impact}</p>
+                      <div className={styles.protocolActions}>
+                        <h4>Solutions</h4>
+                        <ul>
+                          {disruptor.solutions.map((solution) => (
+                            <li key={solution}>{solution}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </article>
+                  </FadeInScale>
+                ))}
+              </div>
+            </section>
           </FadeIn>
 
-          <div className={styles.distractionsGrid}>
-            {circadianDisruptors.map((disruptor, index) => (
-              <FadeInScale key={disruptor.title} delay={index * 0.1}>
-                <div className={styles.distractionCard}>
-                  <h3>{disruptor.title}</h3>
-                  <p className={styles.distractionDescription}>{disruptor.impact}</p>
-                  
-                  <div className={styles.distractionSolutions}>
-                    <h4>Solutions:</h4>
-                    <ul>
-                      {disruptor.solutions.map((solution, idx) => (
-                        <li key={idx}>{solution}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </FadeInScale>
-            ))}
-          </div>
-        </section>
-
-        {/* IMPLEMENTATION GUIDE */}
-        <section className={styles.implementationSection}>
-          <FadeIn>
-            <h2>Implementation Strategy</h2>
+          <FadeIn delay={0.4}>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Implementation Roadmap</h2>
+              </div>
+              <div className={styles.implementationSteps}>
+                {[
+                  {
+                    title: "Anchor Mornings",
+                    text: "Prioritize morning outdoor light every day—this is the cornerstone.",
+                  },
+                  {
+                    title: "Dim Evenings",
+                    text: "Install warm lights and night modes; schedule screens earlier in the day.",
+                  },
+                  {
+                    title: "Add Afternoon Dose",
+                    text: "Layer a second outdoor session to reinforce rhythm and mood.",
+                  },
+                  {
+                    title: "Use Therapy Tools",
+                    text: "Deploy light boxes or blue blockers when schedules or seasons demand.",
+                  },
+                ].map((step, index) => (
+                  <FadeInScale key={step.title} delay={index * 0.05}>
+                    <div className={styles.implementationStep}>
+                      <div className={styles.stepNumber}>{index + 1}</div>
+                      <div className={styles.stepContent}>
+                        <h3>{step.title}</h3>
+                        <p>{step.text}</p>
+                      </div>
+                    </div>
+                  </FadeInScale>
+                ))}
+              </div>
+              <p className={styles.note}>
+                *Lux targets and timelines draw on Huberman Lab light toolkits and Stanford circadian research. Consult your clinician when using light therapy for mood or sleep disorders.
+              </p>
+            </section>
           </FadeIn>
-          
-          <div className={styles.implementationSteps}>
-            <FadeInScale delay={0.1}>
-              <div className={styles.implementationStep}>
-                <div className={styles.stepNumber}>1</div>
-                <div className={styles.stepContent}>
-                  <h3>Start with Morning Light</h3>
-                  <p>Begin each day with 10-30 minutes of bright light exposure within 60 minutes of waking. This is the foundation of circadian health.</p>
-                </div>
-              </div>
-            </FadeInScale>
-            
-            <FadeInScale delay={0.2}>
-              <div className={styles.implementationStep}>
-                <div className={styles.stepNumber}>2</div>
-                <div className={styles.stepContent}>
-                  <h3>Manage Evening Light</h3>
-                  <p>Dim lights 2-3 hours before bed and avoid blue light. This allows natural melatonin production and better sleep quality.</p>
-                </div>
-              </div>
-            </FadeInScale>
-            
-            <FadeInScale delay={0.3}>
-              <div className={styles.implementationStep}>
-                <div className={styles.stepNumber}>3</div>
-                <div className={styles.stepContent}>
-                  <h3>Add Afternoon Reinforcement</h3>
-                  <p>Include afternoon light exposure to strengthen circadian rhythms and maintain consistent sleep timing.</p>
-                </div>
-              </div>
-            </FadeInScale>
-            
-            <FadeInScale delay={0.4}>
-              <div className={styles.implementationStep}>
-                <div className={styles.stepNumber}>4</div>
-                <div className={styles.stepContent}>
-                  <h3>Maintain Consistency</h3>
-                  <p>Keep light exposure timing consistent daily. Your circadian system thrives on predictable patterns.</p>
-                </div>
-              </div>
-            </FadeInScale>
-          </div>
-        </section>
+        </TopicLayout>
       </main>
-
       <Footer />
     </>
   );

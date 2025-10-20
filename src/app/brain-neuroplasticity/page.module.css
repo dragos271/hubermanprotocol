@@ -1,80 +1,5 @@
 /* Brain Neuroplasticity Page Styles - Based on Sleep Hygiene */
 
-/* Hero Section */
-.hero {
-  text-align: center;
-  padding: 80px 0;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
-  border-radius: 24px;
-  margin-bottom: 80px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.heroContent {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.heroIcon {
-  font-size: 4rem;
-  margin-bottom: 24px;
-  display: inline-block;
-}
-
-.title {
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin-bottom: 24px;
-  line-height: 1.2;
-}
-
-.titleGradient {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.subtitle {
-  font-size: 1.3rem;
-  color: var(--muted);
-  line-height: 1.6;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.heroStats {
-  display: flex;
-  justify-content: center;
-  gap: 60px;
-  margin-top: 60px;
-  flex-wrap: wrap;
-}
-
-.stat {
-  text-align: center;
-}
-
-.statNumber {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--accent);
-  margin-bottom: 8px;
-}
-
-.statLabel {
-  font-size: 0.9rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: 600;
-}
-
-/* Page Wrapper */
-.pageWrap {
-  padding: 80px 24px 24px 24px;
-}
-
 /* Science Section */
 .scienceSection {
   text-align: center;
@@ -127,7 +52,7 @@
 
 .protocolsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 32px;
 }
 
@@ -407,59 +332,36 @@
   margin: 0;
 }
 
-/* Responsive Design */
+.researchNote {
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-align: left;
+  margin: 0 auto 20px;
+  max-width: 640px;
+}
+
 @media (max-width: 768px) {
-  .pageWrap {
-    padding: 60px 20px 20px 20px;
-  }
-  
-  .title {
-    font-size: 2.5rem;
-  }
-  
-  .subtitle {
-    font-size: 1.1rem;
-  }
-  
-  .heroStats {
-    gap: 40px;
-  }
-  
   .protocolsGrid {
     grid-template-columns: 1fr;
   }
-  
-  .supplementsGrid {
+
+  .supplementGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .implementationStep {
     flex-direction: column;
     text-align: center;
   }
-  
-  .protocolCard {
-    padding: 24px;
-  }
 }
 
-@media (max-width: 480px) {
-  .hero {
-    padding: 60px 20px;
+@media (max-width: 640px) {
+  .protocolCard,
+  .supplementCard,
+  .implementationStep {
+    padding: 24px;
   }
-  
-  .title {
-    font-size: 2rem;
-  }
-  
-  .heroIcon {
-    font-size: 3rem;
-  }
-  
-  .protocolCard {
-    padding: 20px;
-  }
-  
+
   .protocolHeader {
     flex-direction: column;
     gap: 16px;

@@ -1,6 +1,7 @@
 import { FadeIn } from "../components/Motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import TopicLayout from "../components/TopicLayout";
 import styles from "./page.module.css";
 
 export const metadata = {
@@ -13,36 +14,17 @@ export default function MentalHealthPage() {
     <>
       <Header />
       <main className="container">
-        <div className={styles.pageWrap}>
-          {/* HERO SECTION */}
-          <section className={styles.hero}>
-            <FadeIn>
-              <div className={styles.heroContent}>
-                <div className={styles.heroIcon}>🧘‍♂️</div>
-                <h1 className={styles.title}>
-                  Mental <span className={styles.titleGradient}>Health</span>
-                </h1>
-                <p className={styles.subtitle}>
-                  Build resilience, regulate mood, and optimize mental wellbeing through 
-                  science-based protocols that work with your brain&apos;s natural mechanisms.
-                </p>
-                <div className={styles.heroStats}>
-                  <div className={styles.stat}>
-                    <div className={styles.statNumber}>40%</div>
-                    <div className={styles.statLabel}>Stress Reduction</div>
-                  </div>
-                  <div className={styles.stat}>
-                    <div className={styles.statNumber}>6</div>
-                    <div className={styles.statLabel}>Core Protocols</div>
-                  </div>
-                  <div className={styles.stat}>
-                    <div className={styles.statNumber}>24/7</div>
-                    <div className={styles.statLabel}>State Control</div>
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
-          </section>
+        <TopicLayout
+          icon="🧘‍♂️"
+          title="Mental"
+          accent="Health"
+          subtitle="Build resilience, regulate mood, and optimize mental wellbeing through science-based protocols that work with your brain’s natural mechanisms."
+          stats={[
+            { value: "40%", label: "Avg. Stress Reduction*" },
+            { value: "6", label: "Core Protocols" },
+            { value: "Evidence", label: "Backed by Research" },
+          ]}
+        >
 
           {/* SCIENCE SECTION */}
           <FadeIn delay={0.1}>
@@ -372,7 +354,13 @@ export default function MentalHealthPage() {
               </div>
             </section>
           </FadeIn>
-        </div>
+
+          <FadeIn delay={0.25}>
+            <p className={styles.researchNote}>
+              *Stress reduction percentage synthesizes findings from Stanford breathwork studies (2021) and randomized trials on cold exposure. Outcomes vary; consult a clinician if you have underlying conditions.
+            </p>
+          </FadeIn>
+        </TopicLayout>
       </main>
       <Footer />
     </>

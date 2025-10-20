@@ -1,10 +1,8 @@
 import Header from "../app/components/Header";
 import Footer from "../app/components/Footer";
 import Quote from "../app/components/Quote";
+import StartProtocolWizard from "../app/components/StartProtocolWizard";
 import { FadeIn, FadeInScale } from "../app/components/Motion";
-import CircadianWheel from "../app/components/CircadianWheel";
-import BodySystemDiagram from "../app/components/BodySystemDiagram";
-import NeurotransmitterBalance from "../app/components/NeurotransmitterBalance";
 import styles from "./page.module.css";
 
 export const metadata = {
@@ -31,7 +29,7 @@ export default function HomePage() {
           <FadeIn delay={0.05}>
             <p className={styles.subtitle}>
               Transform your biology with evidence-based protocols. Optimize sleep, stress, focus, and recovery 
-              using neuroscience insights from Dr. Andrew Huberman&apos;s research — no guesswork, just results.
+              using neuroscience insights distilled from Huberman Lab episodes and the peer-reviewed studies they reference — no guesswork, just actionable science.
             </p>
           </FadeIn>
           <FadeIn delay={0.1}>
@@ -41,20 +39,21 @@ export default function HomePage() {
                 <div className={styles.statLabel}>Core Pillars</div>
               </div>
               <div className={styles.stat}>
-                <div className={styles.statNumber}>24/7</div>
-                <div className={styles.statLabel}>Protocol Tracking</div>
+                <div className={styles.statNumber}>200+</div>
+                <div className={styles.statLabel}>Episode Insights</div>
               </div>
               <div className={styles.stat}>
-                <div className={styles.statNumber}>100+</div>
-                <div className={styles.statLabel}>Research Studies</div>
+                <div className={styles.statNumber}>50+</div>
+                <div className={styles.statLabel}>Evidence-Backed Tools</div>
               </div>
             </div>
           </FadeIn>
           <FadeIn delay={0.15}>
             <div className={styles.ctas}>
-              <a href="/daily" className={styles.buttonPrimary}>
-                <span>🚀 Start Your Protocol</span>
-              </a>
+              <StartProtocolWizard
+                buttonClassName={styles.buttonPrimary}
+                buttonLabel="🚀 Start Your Protocol"
+              />
               <a href="/visualizations" className={styles.buttonSecondary}>
                 <span>🧬 Explore Science</span>
               </a>
@@ -93,11 +92,9 @@ export default function HomePage() {
         <section className={styles.science}>
           <FadeIn><h2>The Neuroscience Behind the System</h2></FadeIn>
           <FadeIn delay={0.05}>
-            <p>
-              Your biology follows predictable rhythms. Light, movement, breath, and rest
-              determine hormone release, attention, and recovery. By aligning these behaviors
-              with your natural cycles, you can improve performance, mood, and longevity
-              without willpower or supplements.
+            <p className={styles.scienceIntro}>
+              Your biology follows predictable rhythms. Light, movement, and breath control your hormones. 
+              By timing these behaviors correctly, you can optimize performance naturally—no willpower or supplements needed.
             </p>
           </FadeIn>
 
@@ -180,6 +177,12 @@ export default function HomePage() {
             </div>
           </FadeIn>
         </section>
+
+        <FadeIn delay={0.35}>
+          <p className={styles.researchFootnote}>
+            *Episode and study counts draw on Huberman Lab podcast archive (200+ episodes) and referenced peer-reviewed papers. Always consult a qualified professional before changing medical, sleep, or supplementation protocols.
+          </p>
+        </FadeIn>
       </main>
 
       <Footer />

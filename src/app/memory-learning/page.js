@@ -1,459 +1,370 @@
-import styles from './page.module.css'
+import { FadeIn, FadeInScale } from "../components/Motion";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import TopicLayout from "../components/TopicLayout";
+import styles from "../styles/topicDetail.module.css";
+
+export const metadata = {
+  title: "Memory & Learning – Huberman Protocol",
+  description:
+    "Deploy Huberman Lab-inspired techniques to encode, consolidate, and retrieve information effectively.",
+};
+
+const heroStats = [
+  { value: "90", label: "Minute Learning Cycles" },
+  { value: "10-30", label: "Min NSDR Sessions" },
+  { value: "2-4", label: "Hours Sleep Consolidation" },
+];
+
+const learningProtocols = [
+  {
+    icon: "⏰",
+    timing: "Per session",
+    title: "90-Minute Learning Blocks",
+    description: "Align studying with ultradian attention cycles and plan rest windows.",
+    actions: [
+      "Study up to 90 minutes",
+      "Insert 20–30 minute breaks",
+      "Schedule hardest topics at peak alertness",
+      "Track energy to find best times",
+    ],
+    science:
+      "Neural attention operates in ~90-minute cycles; respecting peaks improves encoding and reduces fatigue.",
+  },
+  {
+    icon: "🔄",
+    timing: "Daily/Weekly",
+    title: "Spaced Repetition",
+    description: "Review material at increasing intervals to strengthen retrieval.",
+    actions: [
+      "Review after 1 day, 3 days, 1 week",
+      "Extend to 2 weeks, 1 month, 3 months",
+      "Adjust spacing based on difficulty",
+      "Use active recall during reviews",
+    ],
+    science:
+      "Spacing activates forgetting curve just before information fades, fortifying neural connections.",
+  },
+  {
+    icon: "🎯",
+    timing: "Per block",
+    title: "Focused Attention Training",
+    description: "Strengthen cognitive control by practicing sustained single-tasking.",
+    actions: [
+      "Start with 10–15 min focus drills",
+      "Gradually increase duration",
+      "Note distractions, return attention",
+      "Use monotasking across daily tasks",
+    ],
+    science:
+      "Attention control circuits strengthen with deliberate practice, enhancing encoding efficiency.",
+  },
+  {
+    icon: "🧩",
+    timing: "Active study",
+    title: "Active Recall",
+    description: "Retrieve information without cues to cement pathways.",
+    actions: [
+      "Close notes and explain concepts aloud",
+      "Teach someone else",
+      "Create mind maps from memory",
+      "Use flashcards with self-testing",
+    ],
+    science:
+      "Retrieval practice outperforms re-reading by strengthening synaptic connections through repeated access.",
+  },
+  {
+    icon: "😴",
+    timing: "Post-learning",
+    title: "Sleep-Dependent Learning",
+    description: "Use sleep and naps to consolidate encoded memories.",
+    actions: [
+      "Target 7–9 hours nightly",
+      "Review key points before bed",
+      "Avoid heavy learning within 3 hours of sleep",
+      "Use 10–20 minute naps after intense sessions",
+    ],
+    science:
+      "Deep and REM sleep migrate information from short-term to long-term stores and integrate knowledge.",
+  },
+  {
+    icon: "🌊",
+    timing: "Pre-study",
+    title: "Neuroplasticity Primers",
+    description: "Prime brain chemistry for learning with movement, cold, or breath.",
+    actions: [
+      "20 min cardio to raise BDNF",
+      "1–3 min cold exposure for dopamine",
+      "Breathwork meditation to dial attention",
+      "Practice novel motor skills",
+    ],
+    science:
+      "BDNF, adrenaline, and dopamine create an ideal neuroplasticity window for encoding new information.",
+  },
+];
+
+const memoryTechniques = [
+  {
+    name: "Method of Loci",
+    type: "Spatial",
+    technique: "Anchor information to familiar locations",
+    benefits: "Harnesses strong spatial memory for sequences",
+    application: "Design mental journey and place concepts along the route",
+  },
+  {
+    name: "Elaborative Encoding",
+    type: "Semantic",
+    technique: "Link new ideas to existing knowledge",
+    benefits: "Creates multiple retrieval pathways",
+    application: "Ask why/how questions; relate to personal stories",
+  },
+  {
+    name: "Dual Coding",
+    type: "Visual",
+    technique: "Pair visuals with verbal info",
+    benefits: "Engages multiple memory systems",
+    application: "Draw diagrams, mental imagery, annotate notes",
+  },
+  {
+    name: "Chunking",
+    type: "Organizational",
+    technique: "Group related items into meaningful units",
+    benefits: "Circumvents working-memory limits",
+    application: "Spot patterns, build categories, summarize",
+  },
+  {
+    name: "Testing Effect",
+    type: "Retrieval",
+    technique: "Self-test without looking",
+    benefits: "Strengthens recall and identifies gaps",
+    application: "Create practice quizzes, explain from memory",
+  },
+  {
+    name: "Interleaving",
+    type: "Practice",
+    technique: "Alternate problem types/topics",
+    benefits: "Improves discrimination and transfer",
+    application: "Mix subjects within sessions, vary examples",
+  },
+];
+
+const learningMistakes = [
+  {
+    title: "Passive Reading",
+    description: "Highlighting without engagement yields poor retention.",
+    solutions: [
+      "Summarize in own words",
+      "Create questions while reading",
+      "Use active recall", 
+      "Teach concepts aloud",
+    ],
+  },
+  {
+    title: "Massed Practice",
+    description: "Cramming overloads memory and fades quickly.",
+    solutions: [
+      "Distribute practice over days",
+      "Apply spaced repetition",
+      "Keep sessions shorter + frequent",
+      "Review before forgetting",
+    ],
+  },
+  {
+    title: "Multitasking",
+    description: "Divided attention weakens encoding.",
+    solutions: [
+      "Monotask with focus blocks",
+      "Eliminate digital distractions",
+      "Practice attention training",
+      "Batch communication windows",
+    ],
+  },
+  {
+    title: "Neglecting Sleep",
+    description: "Inadequate sleep sabotages consolidation.",
+    solutions: [
+      "Prioritize 7–9 hours",
+      "Maintain consistent schedule",
+      "Avoid late-night cramming",
+      "Use short naps strategically",
+    ],
+  },
+];
+
+const implementationSteps = [
+  {
+    title: "Optimize Environment",
+    text: "Design a distraction-free workspace with proper lighting, ergonomics, and minimal devices.",
+  },
+  {
+    title: "Plan Learning Cycles",
+    text: "Schedule 90-minute blocks with clear goals and recovery windows.",
+  },
+  {
+    title: "Use Active Techniques",
+    text: "Leverage active recall, spaced repetition, and elaborative encoding over passive review.",
+  },
+  {
+    title: "Prime Neuroplasticity",
+    text: "Before demanding sessions, deploy exercise, cold, or breathwork to prime the brain.",
+  },
+  {
+    title: "Sleep for Consolidation",
+    text: "Review key points before bed, protect 7–9 hours of sleep, and use naps when needed.",
+  },
+];
 
 export default function MemoryLearningPage() {
   return (
-    <div className={styles.container}>
-      {/* Hero Section */}
-      <section className={styles.hero}>
-        <div className={styles.heroContent}>
-          <div className={styles.heroIcon}>🧠</div>
-          <h1 className={styles.title}>
-            Memory & <span className={styles.titleGradient}>Learning</span>
-          </h1>
-          <p className={styles.subtitle}>
-            Science-based protocols to enhance memory formation, retention, and accelerate learning
-          </p>
-          <div className={styles.heroStats}>
-            <div className={styles.stat}>
-              <div className={styles.statNumber}>90</div>
-              <div className={styles.statLabel}>Min Cycles</div>
-            </div>
-            <div className={styles.stat}>
-              <div className={styles.statNumber}>10-30</div>
-              <div className={styles.statLabel}>Min Sessions</div>
-            </div>
-            <div className={styles.stat}>
-              <div className={styles.statNumber}>2-4</div>
-              <div className={styles.statLabel}>Hours Sleep</div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <>
+      <Header />
+      <main className="container">
+        <TopicLayout
+          icon="🧠"
+          title="Memory"
+          accent="Learning"
+          subtitle="Stack protocols that boost encoding, strengthen consolidation, and sharpen recall."
+          stats={heroStats}
+        >
+          <FadeIn>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Learn How You Learn</h2>
+                <p className={styles.sectionSubtitle}>
+                  Encoding, consolidation, and retrieval depend on attention, repetition, and sleep. Work with your biology to accelerate skill acquisition.
+                </p>
+              </div>
+              <div className={styles.sectionBody}>
+                <p>
+                  Huberman Lab protocols emphasize intentional focus blocks, active recall, priming neurochemistry, and prioritizing sleep. Apply them methodically for compounding gains.
+                </p>
+              </div>
+            </section>
+          </FadeIn>
 
-      {/* Science Section */}
-      <section className={styles.scienceSection}>
-        <h2>The Science of Memory & Learning</h2>
-        <p className={styles.scienceText}>
-          Memory formation involves complex neurobiological processes including encoding, consolidation, and retrieval. 
-          Neuroplasticity allows the brain to form new connections and strengthen existing ones through experience. 
-          Key factors include attention, repetition, sleep, and the timing of learning sessions. Understanding these 
-          mechanisms allows us to optimize learning protocols for maximum retention and skill acquisition.
-        </p>
-      </section>
+          <FadeIn delay={0.1}>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Learning Protocols</h2>
+              </div>
+              <div className={styles.protocolsGrid}>
+                {learningProtocols.map((protocol, index) => (
+                  <FadeInScale key={protocol.title} delay={index * 0.05}>
+                    <article className={styles.protocolCard}>
+                      <div className={styles.protocolHeader}>
+                        <div className={styles.protocolIcon}>{protocol.icon}</div>
+                        <div className={styles.protocolTiming}>{protocol.timing}</div>
+                      </div>
+                      <h3>{protocol.title}</h3>
+                      <p className={styles.protocolDescription}>{protocol.description}</p>
+                      <div className={styles.protocolActions}>
+                        <h4>Implementation</h4>
+                        <ul>
+                          {protocol.actions.map((action) => (
+                            <li key={action}>{action}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className={styles.protocolScience}>
+                        <h4>Why it works</h4>
+                        <p>{protocol.science}</p>
+                      </div>
+                    </article>
+                  </FadeInScale>
+                ))}
+              </div>
+            </section>
+          </FadeIn>
 
-      {/* Learning Protocols */}
-      <section className={styles.protocolsSection}>
-        <h2>Learning Protocols</h2>
-        <p className={styles.sectionSubtitle}>Evidence-based strategies to enhance memory and accelerate learning</p>
-        
-        <div className={styles.protocolsGrid}>
-          <div className={styles.protocolCard}>
-            <div className={styles.protocolHeader}>
-              <div className={styles.protocolIcon}>⏰</div>
-              <div className={styles.protocolTiming}>90 Minutes</div>
-            </div>
-            <h3>Ultradian Learning Cycles</h3>
-            <p className={styles.protocolDescription}>
-              Align learning sessions with natural 90-minute attention cycles for optimal focus
-            </p>
-            <div className={styles.protocolActions}>
-              <h4>Implementation:</h4>
-              <ul>
-                <li>Study for 90 minutes maximum per session</li>
-                <li>Take 20-30 minute breaks between cycles</li>
-                <li>Match high-effort tasks to peak alertness</li>
-                <li>Allow for natural attention decline</li>
-                <li>Track energy levels throughout day</li>
-              </ul>
-            </div>
-            <div className={styles.protocolScience}>
-              <h4>Scientific Basis</h4>
-              <p>
-                Brain attention operates in 90-minute cycles. Working with these natural rhythms 
-                optimizes focus, reduces mental fatigue, and enhances information processing.
+          <FadeIn delay={0.2}>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Memory Techniques</h2>
+                <p className={styles.sectionSubtitle}>
+                  Mix techniques to engage multiple encoding pathways.
+                </p>
+              </div>
+              <div className={styles.protocolsGrid}>
+                {memoryTechniques.map((technique, index) => (
+                  <FadeInScale key={technique.name} delay={index * 0.05}>
+                    <article className={styles.protocolCard}>
+                      <div className={styles.protocolHeader}>
+                        <h3>{technique.name}</h3>
+                        <div className={styles.protocolTiming}>{technique.type}</div>
+                      </div>
+                      <p className={styles.protocolDescription}>{technique.technique}</p>
+                      <div className={styles.protocolActions}>
+                        <h4>Benefits</h4>
+                        <ul>
+                          <li>{technique.benefits}</li>
+                        </ul>
+                      </div>
+                      <div className={styles.protocolScience}>
+                        <h4>Application</h4>
+                        <p>{technique.application}</p>
+                      </div>
+                    </article>
+                  </FadeInScale>
+                ))}
+              </div>
+            </section>
+          </FadeIn>
+
+          <FadeIn delay={0.3}>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Common Mistakes</h2>
+                <p className={styles.sectionSubtitle}>
+                  Avoid these traps to maintain steady progress.
+                </p>
+              </div>
+              <div className={styles.protocolsGrid}>
+                {learningMistakes.map((mistake, index) => (
+                  <FadeInScale key={mistake.title} delay={index * 0.05}>
+                    <article className={styles.protocolCard}>
+                      <h3>{mistake.title}</h3>
+                      <p className={styles.protocolDescription}>{mistake.description}</p>
+                      <div className={styles.protocolActions}>
+                        <h4>Solutions</h4>
+                        <ul>
+                          {mistake.solutions.map((solution) => (
+                            <li key={solution}>{solution}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </article>
+                  </FadeInScale>
+                ))}
+              </div>
+            </section>
+          </FadeIn>
+
+          <FadeIn delay={0.4}>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Implementation Guide</h2>
+              </div>
+              <div className={styles.implementationSteps}>
+                {implementationSteps.map((step, index) => (
+                  <FadeInScale key={step.title} delay={index * 0.05}>
+                    <div className={styles.implementationStep}>
+                      <div className={styles.stepNumber}>{index + 1}</div>
+                      <div className={styles.stepContent}>
+                        <h3>{step.title}</h3>
+                        <p>{step.text}</p>
+                      </div>
+                    </div>
+                  </FadeInScale>
+                ))}
+              </div>
+              <p className={styles.note}>
+                *Performance gains based on studies referenced in Huberman Lab. For learning challenges tied to ADHD or dyslexia, collaborate with specialists alongside these tools.
               </p>
-            </div>
-          </div>
-
-          <div className={styles.protocolCard}>
-            <div className={styles.protocolHeader}>
-              <div className={styles.protocolIcon}>🔄</div>
-              <div className={styles.protocolTiming}>Spaced</div>
-            </div>
-            <h3>Spaced Repetition</h3>
-            <p className={styles.protocolDescription}>
-              Use strategic timing intervals to strengthen memory consolidation and retention
-            </p>
-            <div className={styles.protocolActions}>
-              <h4>Schedule:</h4>
-              <ul>
-                <li>Review after 1 day, 3 days, 1 week</li>
-                <li>Then 2 weeks, 1 month, 3 months</li>
-                <li>Adjust intervals based on difficulty</li>
-                <li>Use active recall during reviews</li>
-                <li>Test yourself before looking at answers</li>
-              </ul>
-            </div>
-            <div className={styles.protocolScience}>
-              <h4>Scientific Basis</h4>
-              <p>
-                Spaced repetition leverages the forgetting curve to strengthen neural pathways 
-                just before information would be lost, creating durable long-term memories.
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.protocolCard}>
-            <div className={styles.protocolHeader}>
-              <div className={styles.protocolIcon}>🎯</div>
-              <div className={styles.protocolTiming}>Per Session</div>
-            </div>
-            <h3>Focused Attention Training</h3>
-            <p className={styles.protocolDescription}>
-              Strengthen attention and concentration through deliberate focus exercises
-            </p>
-            <div className={styles.protocolActions}>
-              <h4>Protocol:</h4>
-              <ul>
-                <li>Start with 10-15 minute focus blocks</li>
-                <li>Gradually increase duration</li>
-                <li>Use single-tasking approach</li>
-                <li>Practice resisting distractions</li>
-                <li>Return attention when it wanders</li>
-              </ul>
-            </div>
-            <div className={styles.protocolScience}>
-              <h4>Scientific Basis</h4>
-              <p>
-                Attention is like a muscle that can be strengthened through practice. 
-                Focused attention training enhances cognitive control and learning capacity.
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.protocolCard}>
-            <div className={styles.protocolHeader}>
-              <div className={styles.protocolIcon}>🧩</div>
-              <div className={styles.protocolTiming}>Active</div>
-            </div>
-            <h3>Active Recall</h3>
-            <p className={styles.protocolDescription}>
-              Strengthen memory through retrieval practice rather than passive review
-            </p>
-            <div className={styles.protocolActions}>
-              <h4>Techniques:</h4>
-              <ul>
-                <li>Close books and recall from memory</li>
-                <li>Explain concepts out loud</li>
-                <li>Create mind maps from memory</li>
-                <li>Use flashcards effectively</li>
-                <li>Teach material to others</li>
-              </ul>
-            </div>
-            <div className={styles.protocolScience}>
-              <h4>Scientific Basis</h4>
-              <p>
-                Active retrieval strengthens neural pathways more effectively than passive review, 
-                creating stronger and more accessible memories.
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.protocolCard}>
-            <div className={styles.protocolHeader}>
-              <div className={styles.protocolIcon}>😴</div>
-              <div className={styles.protocolTiming}>Post-Learning</div>
-            </div>
-            <h3>Sleep-Dependent Learning</h3>
-            <p className={styles.protocolDescription}>
-              Optimize sleep to consolidate memories and enhance learning retention
-            </p>
-            <div className={styles.protocolActions}>
-              <h4>Optimization:</h4>
-              <ul>
-                <li>Get 7-9 hours quality sleep</li>
-                <li>Avoid learning 3 hours before bed</li>
-                <li>Review material before sleep</li>
-                <li>Maintain consistent sleep schedule</li>
-                <li>Take strategic 10-20 minute naps</li>
-              </ul>
-            </div>
-            <div className={styles.protocolScience}>
-              <h4>Scientific Basis</h4>
-              <p>
-                Sleep consolidates memories from temporary to long-term storage. REM and deep sleep 
-                phases are crucial for different types of memory consolidation.
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.protocolCard}>
-            <div className={styles.protocolHeader}>
-              <div className={styles.protocolIcon}>🌊</div>
-              <div className={styles.protocolTiming}>Pre-Study</div>
-            </div>
-            <h3>Neuroplasticity Primers</h3>
-            <p className={styles.protocolDescription}>
-              Prepare the brain for enhanced neuroplasticity and learning capacity
-            </p>
-            <div className={styles.protocolActions}>
-              <h4>Primers:</h4>
-              <ul>
-                <li>20 minutes cardiovascular exercise</li>
-                <li>Cold exposure for 1-3 minutes</li>
-                <li>Meditation or breathing exercises</li>
-                <li>Novel motor skill practice</li>
-                <li>Optimize alertness timing</li>
-              </ul>
-            </div>
-            <div className={styles.protocolScience}>
-              <h4>Scientific Basis</h4>
-              <p>
-                These activities increase BDNF (brain-derived neurotrophic factor), adrenaline, 
-                and dopamine, creating optimal conditions for neuroplasticity and learning.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Memory Techniques */}
-      <section className={styles.techniquesSection}>
-        <h2>Memory Techniques</h2>
-        <p className={styles.sectionSubtitle}>Proven methods to enhance memory encoding and retrieval</p>
-        
-        <div className={styles.techniquesGrid}>
-          <div className={styles.techniqueCard}>
-            <div className={styles.techniqueHeader}>
-              <h3>Method of Loci</h3>
-              <div className={styles.techniqueType}>Spatial</div>
-            </div>
-            <div className={styles.techniqueDescription}>
-              <strong>Technique:</strong> Associate information with familiar spatial locations
-            </div>
-            <div className={styles.techniqueBenefits}>
-              <strong>Benefits:</strong> Leverages spatial memory for enhanced recall of sequences and lists
-            </div>
-            <div className={styles.techniqueApplication}>
-              <strong>Application:</strong> Create mental journey through familiar place, place information at specific locations
-            </div>
-          </div>
-
-          <div className={styles.techniqueCard}>
-            <div className={styles.techniqueHeader}>
-              <h3>Elaborative Encoding</h3>
-              <div className={styles.techniqueType}>Semantic</div>
-            </div>
-            <div className={styles.techniqueDescription}>
-              <strong>Technique:</strong> Connect new information to existing knowledge and experiences
-            </div>
-            <div className={styles.techniqueBenefits}>
-              <strong>Benefits:</strong> Creates multiple retrieval pathways and deeper understanding
-            </div>
-            <div className={styles.techniqueApplication}>
-              <strong>Application:</strong> Ask &quot;how&quot; and &quot;why&quot; questions, relate to personal experiences
-            </div>
-          </div>
-
-          <div className={styles.techniqueCard}>
-            <div className={styles.techniqueHeader}>
-              <h3>Dual Coding</h3>
-              <div className={styles.techniqueType}>Visual</div>
-            </div>
-            <div className={styles.techniqueDescription}>
-              <strong>Technique:</strong> Combine verbal and visual information processing
-            </div>
-            <div className={styles.techniqueBenefits}>
-              <strong>Benefits:</strong> Engages multiple memory systems for stronger encoding
-            </div>
-            <div className={styles.techniqueApplication}>
-              <strong>Application:</strong> Create mental images, diagrams, and visual associations with verbal material
-            </div>
-          </div>
-
-          <div className={styles.techniqueCard}>
-            <div className={styles.techniqueHeader}>
-              <h3>Chunking</h3>
-              <div className={styles.techniqueType}>Organizational</div>
-            </div>
-            <div className={styles.techniqueDescription}>
-              <strong>Technique:</strong> Group related information into manageable units
-            </div>
-            <div className={styles.techniqueBenefits}>
-              <strong>Benefits:</strong> Overcomes working memory limitations and improves recall
-            </div>
-            <div className={styles.techniqueApplication}>
-              <strong>Application:</strong> Identify patterns, group similar items, create meaningful categories
-            </div>
-          </div>
-
-          <div className={styles.techniqueCard}>
-            <div className={styles.techniqueHeader}>
-              <h3>Testing Effect</h3>
-              <div className={styles.techniqueType}>Retrieval</div>
-            </div>
-            <div className={styles.techniqueDescription}>
-              <strong>Technique:</strong> Regular self-testing without looking at materials
-            </div>
-            <div className={styles.techniqueBenefits}>
-              <strong>Benefits:</strong> Strengthens retrieval pathways and identifies knowledge gaps
-            </div>
-            <div className={styles.techniqueApplication}>
-              <strong>Application:</strong> Create practice tests, use flashcards, explain concepts without notes
-            </div>
-          </div>
-
-          <div className={styles.techniqueCard}>
-            <div className={styles.techniqueHeader}>
-              <h3>Interleaving</h3>
-              <div className={styles.techniqueType}>Practice</div>
-            </div>
-            <div className={styles.techniqueDescription}>
-              <strong>Technique:</strong> Mix different types of problems or topics during study sessions
-            </div>
-            <div className={styles.techniqueBenefits}>
-              <strong>Benefits:</strong> Improves discrimination and transfer of learning
-            </div>
-            <div className={styles.techniqueApplication}>
-              <strong>Application:</strong> Alternate between different subjects, vary problem types within sessions
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Learning Mistakes */}
-      <section className={styles.mistakesSection}>
-        <h2>Common Learning Mistakes</h2>
-        <p className={styles.sectionSubtitle}>Avoid these pitfalls for more effective learning and memory</p>
-        
-        <div className={styles.mistakesGrid}>
-          <div className={styles.mistakeCard}>
-            <h3>Passive Reading</h3>
-            <p className={styles.mistakeDescription}>
-              Simply reading and highlighting without active engagement leads to poor retention
-            </p>
-            <div className={styles.mistakeSolutions}>
-              <h4>Solutions:</h4>
-              <ul>
-                <li>Use active recall techniques</li>
-                <li>Summarize in your own words</li>
-                <li>Create questions while reading</li>
-                <li>Explain concepts out loud</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className={styles.mistakeCard}>
-            <h3>Massed Practice</h3>
-            <p className={styles.mistakeDescription}>
-              Cramming all learning into single sessions without spacing leads to rapid forgetting
-            </p>
-            <div className={styles.mistakeSolutions}>
-              <h4>Solutions:</h4>
-              <ul>
-                <li>Distribute practice over time</li>
-                <li>Use spaced repetition schedules</li>
-                <li>Plan multiple shorter sessions</li>
-                <li>Review at increasing intervals</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className={styles.mistakeCard}>
-            <h3>Multitasking During Learning</h3>
-            <p className={styles.mistakeDescription}>
-              Divided attention reduces encoding quality and memory formation
-            </p>
-            <div className={styles.mistakeSolutions}>
-              <h4>Solutions:</h4>
-              <ul>
-                <li>Focus on single task at a time</li>
-                <li>Eliminate distractions</li>
-                <li>Use focused attention blocks</li>
-                <li>Practice monotasking skills</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className={styles.mistakeCard}>
-            <h3>Neglecting Sleep</h3>
-            <p className={styles.mistakeDescription}>
-              Insufficient sleep impairs memory consolidation and learning capacity
-            </p>
-            <div className={styles.mistakeSolutions}>
-              <h4>Solutions:</h4>
-              <ul>
-                <li>Prioritize 7-9 hours nightly</li>
-                <li>Maintain consistent sleep schedule</li>
-                <li>Avoid late-night cramming</li>
-                <li>Use strategic short naps</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Implementation Guide */}
-      <section className={styles.implementationSection}>
-        <h2>Implementation Guide</h2>
-        
-        <div className={styles.implementationSteps}>
-          <div className={styles.implementationStep}>
-            <div className={styles.stepNumber}>1</div>
-            <div className={styles.stepContent}>
-              <h3>Optimize Learning Environment</h3>
-              <p>
-                Create a distraction-free environment with proper lighting, temperature, and organization. 
-                Remove phones and other potential interruptions during focused study sessions.
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.implementationStep}>
-            <div className={styles.stepNumber}>2</div>
-            <div className={styles.stepContent}>
-              <h3>Plan Learning Sessions</h3>
-              <p>
-                Structure sessions around 90-minute ultradian cycles with clear objectives. 
-                Schedule challenging material during peak alertness periods.
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.implementationStep}>
-            <div className={styles.stepNumber}>3</div>
-            <div className={styles.stepContent}>
-              <h3>Use Active Learning Techniques</h3>
-              <p>
-                Implement active recall, spaced repetition, and elaborative encoding. 
-                Test yourself regularly and explain concepts without looking at materials.
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.implementationStep}>
-            <div className={styles.stepNumber}>4</div>
-            <div className={styles.stepContent}>
-              <h3>Prime for Neuroplasticity</h3>
-              <p>
-                Begin sessions with brief cardiovascular exercise, cold exposure, or breathing techniques 
-                to enhance brain state for learning and memory formation.
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.implementationStep}>
-            <div className={styles.stepNumber}>5</div>
-            <div className={styles.stepContent}>
-              <h3>Consolidate Through Sleep</h3>
-              <p>
-                Prioritize quality sleep for memory consolidation. Review key concepts before sleep 
-                and maintain consistent sleep-wake cycles for optimal learning outcomes.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  )
+            </section>
+          </FadeIn>
+        </TopicLayout>
+      </main>
+      <Footer />
+    </>
+  );
 }

@@ -201,16 +201,35 @@
 .card li { margin: 4px 0; }
 
 /* Science */
-.science { margin-top: 84px; text-align: left; }
-.science h2 { text-align: center; margin-bottom: 20px; }
-.science p { max-width: 760px; margin: 0 auto 32px; color: var(--muted); }
+.science { 
+  margin-top: 84px; 
+  text-align: left; 
+}
+
+.science h2 { 
+  text-align: center; 
+  margin-bottom: 20px; 
+}
+
+.scienceIntro { 
+  max-width: 760px; 
+  margin: 0 auto 40px; 
+  color: var(--muted); 
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
 .scienceGrid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
 }
+
 @media (min-width: 900px) {
-  .scienceGrid { grid-template-columns: 1fr 1fr 1fr; }
+  .scienceGrid { 
+    grid-template-columns: 1fr 1fr 1fr; 
+  }
 }
 
 /* CTA */
@@ -690,6 +709,15 @@
   margin-top: 16px;
   margin-bottom: 0;
   font-weight: 500;
+}
+
+.researchFootnote {
+  margin: 40px auto 0;
+  max-width: 720px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.6;
 }
 
 @media (max-width: 768px) {

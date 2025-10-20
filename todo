@@ -1,0 +1,40 @@
+Proposed Flow
+
+“Start Your Protocol” CTA
+
+Launch a full-screen multi-step wizard instead of jumping straight to a single page.
+Steps:
+Goal & Focus Quiz – capture objectives (sleep, focus, body recomposition), constraints (time, schedule), preferences (morning vs evening routines).
+Context – ask about current habits, experience level, available equipment.
+Motivation & Nudges – short science-backed blurbs for each goal so users understand why it matters.
+Summary – show immediate tailored protocol (morning/night anchors, recommended reading). Prompt: “Save & Track this plan”.
+Account Prompt
+
+If the user wants to save, present a lightweight auth dialog (social sign-in + email).
+Clarify benefits: saved protocols, adaptive adjustments, streaks, digests.
+
+
+    3. Dashboard Experience (post-login)
+
+Focus Areas – highlight active goals, show most relevant protocols with evidence snippets.
+Streaks & Progress – daily completion toggles, weekly stats, gentle streak nudges (“You’ve kept your morning light routine 4 days in a row—here’s what that means.”).
+Progress Tracking – allow users to rate adherence or subjective metrics (sleep quality, energy, focus). Display trends/percent improvements with research-based context.
+Goals Tab – include short, science-backed blurbs per goal: “Why this matters”, “How long to see change”.
+Action Digests – weekly or monthly emails summarizing adherence, streaks, and suggested next steps.
+
+    4. Personalized Reminders
+
+Offer optional calendar sync or push notifications that mirror the tailored protocol (morning light reminder, evening dimming cue, NSDR session prompt).
+
+    5. Future Enhancements
+
+Gamification: badges for consistency (e.g., “Circadian Champion” after 14 days).
+Community/social proof: share progress graphs anonymously or invite accountability partners.
+Adaptive content: adjust recommendations based on logged adherence or feedback (lightening the plan if overwhelmed, suggesting advanced protocols if streaks are high).
+Implementation Notes
+
+Start with a client-side wizard storing quiz inputs; wire it to your existing data structures (protocol arrays) to assemble personalized plans.
+When auth arrives, persist quiz results, tailored protocols, and tracking data in a backend (Supabase / Firebase / Next API routes + DB).
+The dashboard can be a new route (/dashboard) using server components fed by the saved user profile.
+Carefully scope the first release: quiz → summary → optional save → minimal dashboard with streak counter + protocol list. Layer advanced analytics, digests, and gamification progressively.
+Happy to help wire up the wizard or prototype the dashboard structure next.

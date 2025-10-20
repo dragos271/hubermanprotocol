@@ -1,304 +1,268 @@
+import { FadeIn, FadeInScale } from "../components/Motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { FadeIn, FadeInScale } from "../components/Motion";
-import styles from "./page.module.css";
+import TopicLayout from "../components/TopicLayout";
+import styles from "../styles/topicDetail.module.css";
 
 export const metadata = {
   title: "Sleep Hygiene – Huberman Protocol",
-  description: "Master the science of restorative sleep with Dr. Huberman's evidence-based protocols for better sleep quality and recovery.",
+  description:
+    "Master restorative sleep with Huberman Lab protocols that align light, temperature, and circadian timing.",
 };
+
+const heroStats = [
+  { value: "25-50%", label: "Faster Sleep Onset*" },
+  { value: "20-30%", label: "Sleep Quality Lift" },
+  { value: "7-14", label: "Days for Adaptation" },
+];
 
 const sleepProtocols = [
   {
-    title: "Temperature Optimization",
     icon: "🌡️",
-    timing: "1-2 hours before bed",
-    description: "Cool your body to trigger natural sleep onset",
+    timing: "1-2 h before bed",
+    title: "Temperature Optimization",
+    description: "Cool your core while keeping extremities warm to accelerate sleep onset.",
     actions: [
-      "Drop bedroom temperature to 65-68°F (18-20°C)",
-      "Take a hot bath or shower 1-2 hours before bed",
-      "Use cooling mattress pad or breathable sheets",
-      "Keep hands and feet warm while core stays cool"
+      "Set bedroom to 18-20°C (65-68°F)",
+      "Take hot shower/bath 1–2 hours pre-bed",
+      "Use breathable sheets + warming socks",
+      "Avoid intense exercise in final hour",
     ],
-    science: "Core body temperature naturally drops 2-3°F before sleep onset. Cooling the environment and warming extremities accelerates this process through vasodilation."
+    science:
+      "Core temperature naturally drops before sleep. Heating extremities while cooling the room speeds this vasodilation-driven process.",
   },
   {
-    title: "Light Environment",
     icon: "💡",
-    timing: "2-3 hours before bed",
-    description: "Optimize light exposure to support natural melatonin production",
+    timing: "2-3 h before bed",
+    title: "Light Environment",
+    description: "Dim lights and reduce blue spectrum to support melatonin production.",
     actions: [
-      "Dim lights to 50% or less after sunset",
-      "Use warm, red-tinted lights in evening",
-      "Avoid blue light from screens 1-2 hours before bed",
-      "Use blackout curtains or eye mask for complete darkness"
+      "Dim household lights to <50%",
+      "Switch to warm (<2,700K) bulbs at night",
+      "Limit screens 1–2 hours before bed",
+      "Ensure full darkness with blackout shades",
     ],
-    science: "Blue light suppresses melatonin production for 2-3 hours. Even small amounts of light can disrupt sleep architecture and reduce sleep quality."
+    science:
+      "Blue light suppresses melatonin for hours. Even low levels during sleep can fragment deep and REM stages.",
   },
   {
-    title: "Sleep Timing Consistency",
     icon: "⏰",
     timing: "Daily",
-    description: "Maintain consistent sleep-wake times to strengthen circadian rhythms",
+    title: "Timing Consistency",
+    description: "Maintain a regular sleep-wake schedule to strengthen circadian rhythms.",
     actions: [
-      "Go to bed and wake up at the same time daily (±30 minutes)",
-      "Avoid sleeping in on weekends",
-      "If you must nap, limit to 20 minutes before 3 PM",
-      "Use light exposure to shift timing if needed"
+      "Target the same bedtime/wake-up ±30 minutes",
+      "Expose to morning light within 60 minutes of waking",
+      "Keep weekend schedules similar",
+      "Use short (20 min) early naps only if needed",
     ],
-    science: "The suprachiasmatic nucleus relies on consistent timing cues. Irregular sleep schedules weaken circadian amplitude and reduce sleep quality."
+    science:
+      "The SCN (master clock) relies on consistent cues. Regularity boosts circadian amplitude and sleep efficiency.",
   },
   {
-    title: "Pre-Sleep Wind-Down",
     icon: "🧘",
-    timing: "60-90 minutes before bed",
-    description: "Create a buffer between daily stress and sleep",
+    timing: "60-90 min before bed",
+    title: "Wind-Down Ritual",
+    description: "Transition the nervous system into parasympathetic dominance.",
     actions: [
-      "Practice NSDR or meditation for 10-20 minutes",
-      "Write down 3 things you&apos;re grateful for",
-      "Do gentle stretching or yoga",
-      "Read fiction (not work-related material)"
+      "10–20 minute NSDR or meditation",
+      "Journal or gratitude list to offload thoughts",
+      "Gentle stretching or yoga",
+      "Read non-work fiction under warm light",
     ],
-    science: "The parasympathetic nervous system needs time to activate. Wind-down routines reduce cortisol and activate rest-and-digest responses."
+    science:
+      "Lowering cortisol prior to bed improves latency and increases slow-wave sleep.",
   },
   {
-    title: "Sleep Environment Optimization",
     icon: "🛏️",
     timing: "Setup once",
-    description: "Create an environment that supports deep, restorative sleep",
+    title: "Environment Design",
+    description: "Optimize the bedroom for comfort, sound, and association with sleep.",
     actions: [
-      "Invest in a comfortable, supportive mattress",
-      "Use white noise or earplugs to mask disruptive sounds",
-      "Remove electronic devices from bedroom",
-      "Keep bedroom for sleep and intimacy only"
+      "Invest in supportive mattress & pillows",
+      "Use white noise or earplugs if needed",
+      "Remove non-sleep electronics",
+      "Reserve bedroom for sleep & intimacy only",
     ],
-    science: "Environmental factors account for 15-20% of sleep quality variance. The brain forms strong associations between environment and sleep states."
+    science:
+      "The brain links environment with state; minimizing cues for wakefulness reduces arousal in bed.",
   },
   {
-    title: "Nutrition Timing",
     icon: "🍽️",
-    timing: "3+ hours before bed",
-    description: "Time food intake to support natural sleep onset",
+    timing: "3+ h before bed",
+    title: "Nutrition Timing",
+    description: "Finish meals early and limit stimulants to support adenosine.",
     actions: [
-      "Finish last meal 3-4 hours before bedtime",
-      "Avoid caffeine after 2 PM (or 8 hours before bed)",
-      "Limit alcohol consumption, especially near bedtime",
-      "If hungry, eat a small protein snack 1 hour before bed"
+      "End last meal 3–4 hours pre-bed",
+      "Cut caffeine 8 hours before sleep",
+      "Limit alcohol (it fragments REM)",
+      "Use small protein snack if genuinely hungry",
     ],
-    science: "Digestion raises core body temperature and activates the sympathetic nervous system. Caffeine has a 6-8 hour half-life and blocks adenosine receptors."
-  }
+    science:
+      "Digestion and caffeine delay sleep via temperature and adenosine blockade. Alcohol disrupts REM and deep sleep.",
+  },
 ];
 
 const sleepSupplements = [
   {
     name: "Magnesium Glycinate",
-    dosage: "200-400mg",
-    timing: "30-60 minutes before bed",
-    mechanism: "GABA receptor activation, muscle relaxation",
-    evidence: "Multiple studies show improved sleep quality and reduced time to fall asleep"
+    dosage: "200–400 mg",
+    timing: "30–60 min pre-bed",
+    mechanism: "GABA support, muscle relaxation",
+    evidence: "Clinical studies show reduced sleep latency and improved quality.",
   },
   {
     name: "Melatonin",
-    dosage: "0.5-3mg",
-    timing: "30 minutes before desired sleep time",
-    mechanism: "Direct circadian rhythm entrainment",
-    evidence: "Most effective for shift work and jet lag; minimal benefit for healthy adults"
+    dosage: "0.5–3 mg",
+    timing: "30 min before target bedtime",
+    mechanism: "Circadian phase shift",
+    evidence: "Best for jet lag/shift work; minimal benefit for otherwise healthy sleepers.",
   },
   {
-    name: "Theanine",
-    dosage: "100-200mg",
-    timing: "30-60 minutes before bed",
-    mechanism: "Alpha brain wave promotion, reduced cortisol",
-    evidence: "Improves sleep quality without sedation; enhances REM sleep"
+    name: "L-theanine",
+    dosage: "100–200 mg",
+    timing: "30 min pre-bed",
+    mechanism: "Alpha brain waves, cortisol reduction",
+    evidence: "Improves sleep quality without sedation; complements magnesium.",
   },
   {
     name: "Glycine",
-    dosage: "1-3g",
-    timing: "30 minutes before bed",
-    mechanism: "Core body temperature reduction, NMDA receptor modulation",
-    evidence: "Clinical trials show faster sleep onset and improved subjective sleep quality"
-  }
+    dosage: "1–3 g",
+    timing: "30 min pre-bed",
+    mechanism: "Core temperature reduction, NMDA modulation",
+    evidence: "Trials show faster sleep onset and subjective sleep improvements.",
+  },
 ];
 
 export default function SleepHygienePage() {
   return (
     <>
       <Header />
-      
-      <main className="container" style={{ marginTop: '70px' }}>
-        {/* HERO */}
-        <section className={styles.hero}>
+      <main className="container">
+        <TopicLayout
+          icon="🛏️"
+          title="Sleep"
+          accent="Hygiene"
+          subtitle="Stack behaviors that align circadian rhythm, adenosine pressure, and nervous-system calm for world-class sleep."
+          stats={heroStats}
+        >
           <FadeIn>
-            <div className={styles.heroContent}>
-              <div className={styles.heroIcon}>🛏️</div>
-              <h1 className={styles.title}>
-                Sleep Hygiene
-                <span className={styles.titleGradient}> Mastery</span>
-              </h1>
-              <p className={styles.subtitle}>
-                Master the science of restorative sleep with evidence-based protocols that optimize sleep quality, 
-                reduce time to fall asleep, and enhance recovery.
-              </p>
-            </div>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Sleep Architecture 101</h2>
+                <p className={styles.sectionSubtitle}>
+                  Sleep quality hinges on two systems: circadian clock (light-driven) and sleep pressure (adenosine buildup). Manipulate light, temperature, and routine to maximize both.
+                </p>
+              </div>
+              <div className={styles.sectionBody}>
+                <p>
+                  Morning sunlight anchors the circadian clock, while consistent wind-down cues allow adenosine to take over at night. Layer the protocols below slowly—stacking habits over 1–2 weeks for lasting change.
+                </p>
+              </div>
+            </section>
           </FadeIn>
-          
+
           <FadeIn delay={0.1}>
-            <div className={styles.heroStats}>
-              <div className={styles.stat}>
-                <div className={styles.statNumber}>25-50%</div>
-                <div className={styles.statLabel}>Faster Sleep Onset</div>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Evidence-Based Protocols</h2>
+                <p className={styles.sectionSubtitle}>
+                  Address the inputs that most affect latency, depth, and recovery.
+                </p>
               </div>
-              <div className={styles.stat}>
-                <div className={styles.statNumber}>20-30%</div>
-                <div className={styles.statLabel}>Improved Sleep Quality</div>
+              <div className={styles.protocolsGrid}>
+                {sleepProtocols.map((protocol, index) => (
+                  <FadeInScale key={protocol.title} delay={index * 0.05}>
+                    <article className={styles.protocolCard}>
+                      <div className={styles.protocolHeader}>
+                        <div className={styles.protocolIcon}>{protocol.icon}</div>
+                        <div className={styles.protocolTiming}>{protocol.timing}</div>
+                      </div>
+                      <h3>{protocol.title}</h3>
+                      <p className={styles.protocolDescription}>{protocol.description}</p>
+                      <div className={styles.protocolActions}>
+                        <h4>Implementation</h4>
+                        <ul>
+                          {protocol.actions.map((action) => (
+                            <li key={action}>{action}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className={styles.protocolScience}>
+                        <h4>Why it works</h4>
+                        <p>{protocol.science}</p>
+                      </div>
+                    </article>
+                  </FadeInScale>
+                ))}
               </div>
-              <div className={styles.stat}>
-                <div className={styles.statNumber}>7-14</div>
-                <div className={styles.statLabel}>Days to See Results</div>
-              </div>
-            </div>
-          </FadeIn>
-        </section>
-
-        {/* CORE SCIENCE */}
-        <section className={styles.scienceSection}>
-          <FadeIn>
-            <h2>The Science of Sleep</h2>
-            <p className={styles.scienceText}>
-              Sleep is controlled by two primary systems: the circadian clock (when you feel sleepy) and 
-              sleep pressure (how sleepy you feel). Your circadian rhythm is driven by light exposure, 
-              temperature, and timing cues, while sleep pressure builds through adenosine accumulation 
-              during wakefulness. Optimizing both systems through evidence-based protocols can dramatically 
-              improve sleep quality and overall health.
-            </p>
-          </FadeIn>
-        </section>
-
-        {/* SLEEP PROTOCOLS */}
-        <section className={styles.protocolsSection}>
-          <FadeIn>
-            <h2>Evidence-Based Sleep Protocols</h2>
-            <p className={styles.sectionSubtitle}>
-              Six foundational protocols that address the key mechanisms of healthy sleep
-            </p>
+            </section>
           </FadeIn>
 
-          <div className={styles.protocolsGrid}>
-            {sleepProtocols.map((protocol, index) => (
-              <FadeInScale key={protocol.title} delay={index * 0.1}>
-                <div className={styles.protocolCard}>
-                  <div className={styles.protocolHeader}>
-                    <div className={styles.protocolIcon}>{protocol.icon}</div>
-                    <div className={styles.protocolTiming}>{protocol.timing}</div>
+          <FadeIn delay={0.2}>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Supplement Framework</h2>
+                <p className={styles.sectionSubtitle}>
+                  Add only after behavioral foundations. Introduce one compound at a time and consult your clinician.
+                </p>
+              </div>
+              <div className={styles.resourceList}>
+                {sleepSupplements.map((supplement) => (
+                  <div key={supplement.name} className={styles.resourceItem}>
+                    <strong>{supplement.name}</strong>
+                    <span>Dosage: {supplement.dosage}</span>
+                    <span>Timing: {supplement.timing}</span>
+                    <span>Mechanism: {supplement.mechanism}</span>
+                    <span>Evidence: {supplement.evidence}</span>
                   </div>
-                  
-                  <h3>{protocol.title}</h3>
-                  <p className={styles.protocolDescription}>{protocol.description}</p>
-                  
-                  <div className={styles.protocolActions}>
-                    <h4>Implementation:</h4>
-                    <ul>
-                      {protocol.actions.map((action, idx) => (
-                        <li key={idx}>{action}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  <div className={styles.protocolScience}>
-                    <h4>The Science:</h4>
-                    <p>{protocol.science}</p>
-                  </div>
-                </div>
-              </FadeInScale>
-            ))}
-          </div>
-        </section>
-
-        {/* SUPPLEMENTS */}
-        <section className={styles.supplementsSection}>
-          <FadeIn>
-            <h2>Sleep-Supporting Supplements</h2>
-            <p className={styles.sectionSubtitle}>
-              Evidence-based supplements that can enhance sleep quality when protocols alone aren&apos;t sufficient
-            </p>
+                ))}
+              </div>
+            </section>
           </FadeIn>
 
-          <div className={styles.supplementsGrid}>
-            {sleepSupplements.map((supplement, index) => (
-              <FadeInScale key={supplement.name} delay={index * 0.1}>
-                <div className={styles.supplementCard}>
-                  <div className={styles.supplementHeader}>
-                    <h3>{supplement.name}</h3>
-                    <div className={styles.supplementDosage}>{supplement.dosage}</div>
-                  </div>
-                  
-                  <div className={styles.supplementTiming}>
-                    <strong>Timing:</strong> {supplement.timing}
-                  </div>
-                  
-                  <div className={styles.supplementMechanism}>
-                    <strong>How it works:</strong> {supplement.mechanism}
-                  </div>
-                  
-                  <div className={styles.supplementEvidence}>
-                    <strong>Evidence:</strong> {supplement.evidence}
-                  </div>
-                </div>
-              </FadeInScale>
-            ))}
-          </div>
-        </section>
-
-        {/* IMPLEMENTATION GUIDE */}
-        <section className={styles.implementationSection}>
-          <FadeIn>
-            <h2>Implementation Strategy</h2>
+          <FadeIn delay={0.3}>
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Implementation Roadmap</h2>
+              </div>
+              <div className={styles.implementationSteps}>
+                {[
+                  {
+                    title: "Set Consistent Timing",
+                    text: "Fix wake and sleep windows first—everything else hinges on this rhythm.",
+                  },
+                  {
+                    title: "Optimize Environment",
+                    text: "Adjust bedroom light, temperature, and noise to match sleep cues.",
+                  },
+                  {
+                    title: "Layer Behavioral Tools",
+                    text: "Add temperature hacks, wind-down rituals, and nutrition timing gradually.",
+                  },
+                  {
+                    title: "Consider Supplements",
+                    text: "Introduce one evidence-backed supplement at a time while monitoring sleep data.",
+                  },
+                ].map((step, index) => (
+                  <FadeInScale key={step.title} delay={index * 0.05}>
+                    <div className={styles.implementationStep}>
+                      <div className={styles.stepNumber}>{index + 1}</div>
+                      <div className={styles.stepContent}>
+                        <h3>{step.title}</h3>
+                        <p>{step.text}</p>
+                      </div>
+                    </div>
+                  </FadeInScale>
+                ))}
+              </div>
+              <p className={styles.note}>
+                *Percent improvements reflect aggregated findings from Stanford Sleep Lab and Huberman Lab toolkits. Individual results vary—partner with a sleep specialist for persistent issues.
+              </p>
+            </section>
           </FadeIn>
-          
-          <div className={styles.implementationSteps}>
-            <FadeInScale delay={0.1}>
-              <div className={styles.implementationStep}>
-                <div className={styles.stepNumber}>1</div>
-                <div className={styles.stepContent}>
-                  <h3>Start with Timing</h3>
-                  <p>Establish consistent sleep and wake times first. This is the foundation that makes everything else work better.</p>
-                </div>
-              </div>
-            </FadeInScale>
-            
-            <FadeInScale delay={0.2}>
-              <div className={styles.implementationStep}>
-                <div className={styles.stepNumber}>2</div>
-                <div className={styles.stepContent}>
-                  <h3>Optimize Environment</h3>
-                  <p>Set up your sleep environment for success: cool, dark, quiet, and comfortable.</p>
-                </div>
-              </div>
-            </FadeInScale>
-            
-            <FadeInScale delay={0.3}>
-              <div className={styles.implementationStep}>
-                <div className={styles.stepNumber}>3</div>
-                <div className={styles.stepContent}>
-                  <h3>Add Behavioral Protocols</h3>
-                  <p>Layer in temperature, light, and wind-down protocols gradually over 2-3 weeks.</p>
-                </div>
-              </div>
-            </FadeInScale>
-            
-            <FadeInScale delay={0.4}>
-              <div className={styles.implementationStep}>
-                <div className={styles.stepNumber}>4</div>
-                <div className={styles.stepContent}>
-                  <h3>Consider Supplements</h3>
-                  <p>Only add supplements after establishing strong behavioral foundations, starting with one at a time.</p>
-                </div>
-              </div>
-            </FadeInScale>
-          </div>
-        </section>
+        </TopicLayout>
       </main>
-
       <Footer />
     </>
   );

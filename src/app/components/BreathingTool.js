@@ -5,42 +5,61 @@ import styles from "../styles/BreathingTool.module.css";
 export default function BreathingTool() {
   const [running, setRunning] = useState(false);
   const [phase, setPhase] = useState("ready");
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (!running) return;
+    if (!running) return undefined;
 
-    let i = 0;
+    const totalCycles = 10;
     const phases = [
       { label: "Inhale (short)", duration: 1500 },
       { label: "Inhale again (top-up)", duration: 1000 },
       { label: "Exhale (long)", duration: 4000 },
     ];
 
-    const runCycle = () => {
-      const p = phases[i % phases.length];
-      setPhase(p.label);
-      setCount((prev) => prev + 1);
+    let cycle = 0;
+    let phaseIndex = 0;
+    let timeoutId;
+    let active = true;
 
-      setTimeout(() => {
-        i++;
-        if (running && count < 10) {
-          runCycle();
-        } else {
-          setRunning(false);
-          setPhase("done");
+    const runPhase = () => {
+      if (!active) return;
+
+      const current = phases[phaseIndex];
+      setPhase(current.label);
+
+      timeoutId = setTimeout(() => {
+        if (!active) return;
+
+        phaseIndex += 1;
+        if (phaseIndex >= phases.length) {
+          phaseIndex = 0;
+          cycle += 1;
+          if (cycle >= totalCycles) {
+            setRunning(false);
+            setPhase("done");
+            return;
+          }
         }
-      }, p.duration);
+        runPhase();
+      }, current.duration);
     };
 
-    runCycle();
+    runPhase();
+
+    return () => {
+      active = false;
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, [running]);
 
   return (
     <div className={styles.box}>
       <button
         className={styles.button}
-        onClick={() => { setCount(0); setRunning(true); setPhase("ready"); }}
+        onClick={() => {
+          setPhase("ready");
+          setRunning(true);
+        }}
         disabled={running}
       >
         {running ? "Running..." : "Start Physiological Sigh (10 cycles)"}

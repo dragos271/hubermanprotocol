@@ -1,0 +1,409 @@
+.overlay {
+  position: fixed;
+  inset: 70px 0 0 0;
+  background: rgba(9, 11, 19, 0.72);
+  backdrop-filter: blur(18px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  z-index: 10000;
+}
+
+.panel {
+  width: min(960px, 100%);
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.15), rgba(17, 24, 39, 0.85));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 32px;
+  padding: 32px 40px;
+  color: var(--text);
+  position: relative;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.45);
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.closeButton:hover {
+  color: var(--text);
+}
+
+.stepHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.stepTitle {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 700;
+  margin: 0;
+}
+
+.stepIndicator {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.progressValue {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  border-radius: inherit;
+  transition: width 0.4s ease;
+}
+
+.contentGrid {
+  display: grid;
+  gap: 24px;
+}
+
+.sectionLabel {
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 4px 0;
+}
+
+.goalGrid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.optionCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: left;
+  color: var(--text);
+}
+
+.optionCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(138, 180, 255, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.optionCardSelected {
+  background: linear-gradient(135deg, rgba(138, 180, 255, 0.22), rgba(214, 107, 255, 0.18));
+  border-color: rgba(138, 180, 255, 0.7);
+  box-shadow: 0 12px 40px rgba(59, 130, 246, 0.25);
+  color: #0b1220;
+}
+
+.optionTitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 6px 0;
+}
+
+.optionDescription {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.chipGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.chip {
+  position: relative;
+  border-radius: 999px;
+  padding: 12px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 140px;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.chip small {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.chip:hover {
+  border-color: rgba(138, 180, 255, 0.45);
+  transform: translateY(-2px);
+}
+
+.chipSelected {
+  border-color: rgba(138, 180, 255, 0.7);
+  background: linear-gradient(135deg, rgba(138, 180, 255, 0.25), rgba(214, 107, 255, 0.25));
+  box-shadow: 0 10px 28px rgba(138, 180, 255, 0.32);
+}
+
+.chipSelected small {
+  color: rgba(11, 18, 32, 0.85);
+}
+
+.motivationGrid {
+  display: grid;
+  gap: 18px;
+}
+
+.summaryGrid {
+  display: grid;
+  gap: 18px;
+}
+
+.summarySection {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 20px;
+}
+
+.summarySection h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.05rem;
+}
+
+.summarySection ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  display: grid;
+  gap: 6px;
+}
+
+.summarySection ul li {
+  list-style: none;
+  position: relative;
+  padding-left: 18px;
+}
+
+.summarySection ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: -2px;
+  color: rgba(138, 180, 255, 0.9);
+  font-size: 1.1rem;
+}
+
+.summaryLinks {
+  display: grid;
+  gap: 12px;
+}
+
+.summaryLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.summaryLink:hover {
+  transform: translateY(-2px);
+  border-color: rgba(138, 180, 255, 0.55);
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.ghostButton,
+.primaryButton {
+  border-radius: 999px;
+  padding: 12px 22px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ghostButton {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text);
+}
+
+.ghostButton:hover {
+  transform: translateY(-2px);
+  border-color: rgba(138, 180, 255, 0.4);
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, rgba(138, 180, 255, 0.85), rgba(214, 107, 255, 0.9));
+  border: none;
+  color: #0b1220;
+  box-shadow: 0 12px 30px rgba(138, 180, 255, 0.35);
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(138, 180, 255, 0.45);
+}
+
+.primaryButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.motivationGrid {
+  display: grid;
+  gap: 16px;
+}
+
+.motivationCard {
+  border-radius: 18px;
+  border: 1px solid rgba(138, 180, 255, 0.22);
+  padding: 18px;
+  background: rgba(138, 180, 255, 0.12);
+}
+
+.motivationCard h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.05rem;
+}
+
+.motivationCard p {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.loginModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 11, 19, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 11000;
+}
+
+.loginCard {
+  background: rgba(13, 16, 24, 0.95);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 28px;
+  width: min(420px, 100%);
+  color: var(--text);
+  display: grid;
+  gap: 18px;
+}
+
+.loginCard h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.benefitsList {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  display: grid;
+  gap: 6px;
+}
+
+.loginActions {
+  display: grid;
+  gap: 10px;
+}
+
+.socialButton,
+.emailButton {
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.emailButton {
+  background: linear-gradient(135deg, rgba(138, 180, 255, 0.85), rgba(214, 107, 255, 0.9));
+  color: #0b1220;
+  border: none;
+}
+
+.closeLogin {
+  text-align: center;
+  border: none;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 720px) {
+  .panel {
+    padding: 28px 22px;
+    border-radius: 24px;
+  }
+
+  .contentGrid {
+    gap: 16px;
+  }
+
+  .optionCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .buttonRow {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .summaryLink {
+    flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  }
+}

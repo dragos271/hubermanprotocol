@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { FadeIn, FadeInScale } from "../components/Motion";
+import TopicLayout from "../components/TopicLayout";
 import styles from "./page.module.css";
 
 export const metadata = {
@@ -125,38 +126,18 @@ export default function NervousSystemPage() {
   return (
     <>
       <Header />
-      <main className="container" style={{ marginTop: '70px' }}>
-        {/* HERO */}
-        <section className={styles.hero}>
-          <FadeIn>
-            <div className={styles.heroContent}>
-              <div className={styles.heroIcon}>⚡</div>
-              <h1 className={styles.title}>
-                Nervous System
-                <span className={styles.titleGradient}> Regulation</span>
-              </h1>
-              <p className={styles.subtitle}>
-                Practical tools to understand and direct your autonomic state—shifting between high alertness, focused engagement, and deep recovery on demand.
-              </p>
-            </div>
-          </FadeIn>
-          <FadeIn delay={0.1}>
-            <div className={styles.heroStats}>
-              <div className={styles.stat}>
-                <div className={styles.statNumber}>1 min</div>
-                <div className={styles.statLabel}>To Downshift Stress</div>
-              </div>
-              <div className={styles.stat}>
-                <div className={styles.statNumber}>2–3x</div>
-                <div className={styles.statLabel}>Dopamine Lift (Cold)</div>
-              </div>
-              <div className={styles.stat}>
-                <div className={styles.statNumber}>10–30 min</div>
-                <div className={styles.statLabel}>NSDR Recovery</div>
-              </div>
-            </div>
-          </FadeIn>
-        </section>
+      <main className="container" style={{ marginTop: "70px" }}>
+        <TopicLayout
+          icon="⚡"
+          title="Nervous System"
+          accent="Regulation"
+          subtitle="Practical tools to understand and direct your autonomic state—shifting between high alertness, focused engagement, and deep recovery on demand."
+          stats={[
+            { value: "1 min", label: "Rapid Stress Reset" },
+            { value: "2–3×", label: "Dopamine Lift (Cold)*" },
+            { value: "10–30 min", label: "NSDR Recovery" },
+          ]}
+        >
 
         {/* CORE SCIENCE */}
         <section className={styles.scienceSection}>
@@ -279,6 +260,17 @@ export default function NervousSystemPage() {
             </FadeInScale>
           </div>
         </section>
+
+        <FadeIn delay={0.45}>
+          <p className={styles.researchNote}>
+            *Cold exposure data: Søberg et al., 2022 (Cell Reports Medicine) reporting sustained catecholamine and dopamine increases following deliberate cold protocols. Increase exposure gradually and consult your clinician if you have cardiovascular considerations.
+          </p>
+
+          <p className={styles.researchNote}>
+            Additional evidence sources include Stanford breathwork studies (2021) and Huberman Lab episodes 21, 31, and 171 discussing autonomic regulation mechanisms.
+          </p>
+        </FadeIn>
+        </TopicLayout>
       </main>
       <Footer />
     </>
