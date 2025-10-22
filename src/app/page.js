@@ -2,8 +2,10 @@ import Header from "../app/components/Header";
 import Footer from "../app/components/Footer";
 import Quote from "../app/components/Quote";
 import StartProtocolWizard from "../app/components/StartProtocolWizard";
+import BlurText from "../app/components/BlurText";
 import { FadeIn, FadeInScale } from "../app/components/Motion";
 import styles from "./page.module.css";
+import DashboardCTA from "./components/DashboardCTA";
 
 export const metadata = {
   title: "Huberman Protocol – Science-Based Systems for Mind & Body",
@@ -21,8 +23,12 @@ export default function HomePage() {
           <FadeIn>
             <div className={styles.heroContent}>
               <h1 className={styles.title}>
-                Science-Based Systems for 
-                <span className={styles.titleGradient}> Peak Performance</span>
+                <BlurText
+                  text="Science-Based Systems for Peak Performance"
+                  delay={120}
+                  animateBy="words"
+                  direction="top"
+                />
               </h1>
             </div>
           </FadeIn>
@@ -54,6 +60,7 @@ export default function HomePage() {
                 buttonClassName={styles.buttonPrimary}
                 buttonLabel="🚀 Start Your Protocol"
               />
+              <DashboardCTA />
               <a href="/visualizations" className={styles.buttonSecondary}>
                 <span>🧬 Explore Science</span>
               </a>

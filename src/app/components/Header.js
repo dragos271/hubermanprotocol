@@ -1,142 +1,91 @@
 "use client";
-import Link from "next/link";
+
+import { useMemo } from "react";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import styles from "../styles/Header.module.css";
+import "../../../components/PillNav/PillNav.css";
+import PillNav from "../../../components/PillNav/PillNav";
+
+const NAV_ITEMS = [
+  { label: "Daily", href: "/daily" },
+  { label: "Topics", href: "/topics" },
+  { label: "Sleep", href: "/sleep" },
+  { label: "Stress", href: "/stress" },
+  { label: "Focus", href: "/mental" },
+  { label: "NSDR", href: "/nsdr" },
+  { label: "Charts", href: "/visualizations" },
+];
 
 export default function Header() {
   const pathname = usePathname();
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { data: session, status } = useSession();
 
-  const primaryLinks = [
-    { href: "/daily", label: "Daily" },
-    { href: "/topics", label: "Topics" },
-    { href: "/sleep", label: "Sleep" },
-    { href: "/stress", label: "Stress" },
-    { href: "/mental", label: "Focus" },
-    { href: "/nutrition", label: "Nutrition" },
-    { href: "/nsdr", label: "NSDR" },
-    { href: "/visualizations", label: "Charts" },
-  ];
-
-  const moreSections = [
-    {
-      title: "Physical Performance",
-      links: [{ href: "/physical", label: "Movement & Exercise" }],
-    },
-    {
-      title: "Advanced Protocols",
-      links: [
-        { href: "/seasonal", label: "Seasonal Optimization" },
-        { href: "/biohacking", label: "Biohacking Tools" },
-      ],
-    },
-  ];
-
-  const isActive = (path) => pathname === path;
-  const isMoreActive = () =>
-    moreSections.some((section) =>
-      section.links.some((link) => isActive(link.href))
-    );
-
-  useEffect(() => {
-    setIsMobileNavOpen(false);
-    setIsDropdownOpen(false);
-  }, [pathname]);
-
-  const toggleMobileNav = () => setIsMobileNavOpen((prev) => !prev);
-  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
-
-  const handleDropdownPointerEnter = (event) => {
-    if (event.pointerType === "mouse") {
-      setIsDropdownOpen(true);
+  const userFirstName = useMemo(() => {
+    const fullName = session?.user?.name;
+    if (fullName && fullName.trim()) {
+      return fullName.split(" ")[0];
     }
-  };
+    const email = session?.user?.email;
+    return email ? email.split("@")[0] : null;
+  }, [session?.user?.name, session?.user?.email]);
 
-  const handleDropdownPointerLeave = (event) => {
-    if (event.pointerType === "mouse") {
-      setIsDropdownOpen(false);
-    }
-  };
+  const userInitial = useMemo(() => {
+    const source = session?.user?.name ?? session?.user?.email ?? "";
+    return source.trim().charAt(0).toUpperCase() || "U";
+  }, [session?.user?.name, session?.user?.email]);
 
-  const handleNavLinkClick = () => {
-    setIsMobileNavOpen(false);
-    setIsDropdownOpen(false);
-  };
+  const handleSignIn = () => signIn("google", { callbackUrl: "/dashboard" });
+  const handleSignOut = () => signOut({ callbackUrl: "/" });
 
   return (
     <header className={styles.header}>
-      <div className={`container ${styles.inner}`}>
-        <Link href="/" className={styles.brand} aria-label="Huberman Protocol home">
-          Huberman Protocol
-        </Link>
-
-        <button
-          type="button"
-          className={`${styles.navToggle} ${isMobileNavOpen ? styles.navToggleActive : ""}`}
-          onClick={toggleMobileNav}
-          aria-expanded={isMobileNavOpen}
-          aria-controls="site-nav"
-          aria-label="Toggle navigation"
-        >
-          <span className={styles.navToggleBar} />
-          <span className={styles.navToggleBar} />
-          <span className={styles.navToggleBar} />
-        </button>
-
-        <nav
-          id="site-nav"
-          className={`${styles.nav} ${isMobileNavOpen ? styles.navOpen : ""}`}
-          aria-label="Primary"
-        >
-          <div className={styles.navLinks}>
-            {primaryLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={isActive(link.href) ? styles.navHighlight : ""}
-                onClick={handleNavLinkClick}
-              >
-                {link.label}
-              </Link>
-            ))}
-
-            <div
-              className={`${styles.dropdown} ${isDropdownOpen ? styles.dropdownOpen : ""}`}
-              onPointerEnter={handleDropdownPointerEnter}
-              onPointerLeave={handleDropdownPointerLeave}
-            >
-              <button
-                type="button"
-                className={`${styles.dropdownButton} ${isMoreActive() ? styles.navHighlight : ""}`}
-                onClick={toggleDropdown}
-                aria-expanded={isDropdownOpen}
-              >
-                More <span className={styles.dropdownArrow}>▼</span>
+      <div className={styles.inner}>
+        <div className={styles.pillNavShell}>
+          <PillNav
+            logo="/logo.svg"
+            logoAlt="Huberman Protocol"
+            items={NAV_ITEMS}
+            activeHref={pathname}
+            className={styles.pillNav}
+            ease="power2.easeOut"
+            baseColor="rgba(12, 18, 34, 0.96)"
+            pillColor="rgba(15, 23, 42, 0.72)"
+            hoveredPillTextColor="#f8fafc"
+            pillTextColor="#e2e8f0"
+            initialLoadAnimation
+          />
+        </div>
+        <div className={styles.authControls}>
+          {status === "loading" ? (
+            <div className={styles.authSkeleton} aria-hidden="true" />
+          ) : session?.user ? (
+            <>
+              <a href="/dashboard" className={styles.sessionSummary}>
+                <span className={styles.sessionAvatar} aria-hidden="true">
+                  {session.user.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={session.user.image} alt="" />
+                  ) : (
+                    <span>{userInitial}</span>
+                  )}
+                </span>
+                <span className={styles.sessionMeta}>
+                  <span className={styles.sessionLabel}>Welcome</span>
+                  <span className={styles.sessionName}>{userFirstName ?? "Explorer"}</span>
+                </span>
+              </a>
+              <button type="button" className={styles.signOutGhost} onClick={handleSignOut}>
+                Sign out
               </button>
-
-              {isDropdownOpen && (
-                <div className={styles.dropdownMenu} role="menu">
-                  {moreSections.map((section) => (
-                    <div key={section.title} className={styles.dropdownSection}>
-                      <h4>{section.title}</h4>
-                      {section.links.map((link) => (
-                        <Link
-                          key={link.href}
-                          href={link.href}
-                          onClick={handleNavLinkClick}
-                        >
-                          {link.label}
-                        </Link>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </nav>
+            </>
+          ) : (
+            <button type="button" className={styles.signInCta} onClick={handleSignIn}>
+              <span>Sign in</span>
+              <span className={styles.signInIcon}>→</span>
+            </button>
+          )}
+        </div>
       </div>
     </header>
   );

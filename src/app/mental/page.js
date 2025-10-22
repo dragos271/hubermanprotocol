@@ -2,9 +2,10 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { FadeIn } from "../components/Motion";
 import styles from "../sleep/page.module.css"; // Use shared styles
+import TrueFocus from "../../../components/TrueFocus/TrueFocus";
 
 export const metadata = {
-  title: "Mental Health & Focus - Huberman Protocol",
+  title: "Mental Focus - Huberman Protocol",
   description: "Optimize mental clarity, focus, and emotional regulation with evidence-based protocols.",
 };
 
@@ -109,9 +110,22 @@ export default function MentalPage() {
       <main className="container">
         <div className={styles.pageWrap}>
           {/* HERO */}
-          <section className={styles.hero}>
+          <section className={styles.hero} style={{ paddingTop: "clamp(140px, 14vw, 200px)" }}>
             <FadeIn>
-              <h1 className={styles.pageTitle}>Mental Health & Peak Focus</h1>
+              <div
+                className={styles.pageTitle}
+                style={{ display: "inline-flex" }}
+              >
+                <TrueFocus
+                  sentence="Mental Focus"
+                  manualMode={false}
+                  blurAmount={12}
+                  borderColor="#6366f1"
+                  glowColor="rgba(99, 102, 241, 0.55)"
+                  animationDuration={0.8}
+                  pauseBetweenAnimations={1.4}
+                />
+              </div>
               <p className={styles.pageSubtitle}>
                 Get locked in, stay focused, and optimize your mental state with neuroscience-backed protocols.
               </p>

@@ -34,6 +34,14 @@
   text-align: center;
 }
 
+.title span[data-word="Peak"],
+.title span[data-word="Performance"] {
+  background: linear-gradient(135deg, #8B5CF6, #EF4444, #06B6D4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .titleGradient {
   background: linear-gradient(135deg, #8B5CF6, #EF4444, #06B6D4);
   -webkit-background-clip: text;
@@ -102,6 +110,7 @@
 }
 
 .buttonPrimary,
+.buttonTertiary,
 .buttonGhost,
 .buttonSecondary,
 .buttonPrimaryLarge,
@@ -130,12 +139,25 @@
 }
 
 .buttonSecondary,
+.buttonTertiary,
 .buttonSecondaryLarge {
   padding: 14px 28px;
   background: rgba(255, 255, 255, 0.05);
   color: var(--text);
   border-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(20px);
+}
+
+.buttonTertiary {
+  border-color: rgba(99, 102, 241, 0.35);
+  background: rgba(99, 102, 241, 0.12);
+  color: rgba(224, 231, 255, 0.95);
+}
+
+.buttonTertiary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(99, 102, 241, 0.27);
+  border-color: rgba(99, 102, 241, 0.55);
 }
 
 .buttonPrimaryLarge,
@@ -152,6 +174,7 @@
 }
 
 .buttonSecondary:hover,
+.buttonTertiary:hover,
 .buttonSecondaryLarge:hover {
   transform: translateY(-2px);
   background: rgba(255, 255, 255, 0.1);

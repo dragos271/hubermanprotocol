@@ -309,14 +309,14 @@ function AccountPrompt({ onClose, hasSaved }) {
           <button
             type="button"
             className={styles.emailButton}
-            onClick={() => signIn()}
+            onClick={() => signIn(undefined, { callbackUrl: "/dashboard" })}
           >
             Sign in / Create account
           </button>
           <button
             type="button"
             className={styles.socialButton}
-            onClick={() => signIn("google")}
+            onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
           >
             Continue with Google
           </button>
@@ -647,18 +647,34 @@ function ProtocolWizard({ onClose }) {
 
 export default function StartProtocolWizard({ buttonClassName = "", buttonLabel = "Start Your Protocol" }) {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session, status } = useSession();
+
+  const finalLabel =
+    status === "loading"
+      ? "Loading..."
+      : session?.user
+      ? "View your protocol"
+      : buttonLabel;
+  const handleClick = () => {
+    if (session?.user) {
+      window.location.href = "/dashboard";
+      return;
+    }
+    setIsOpen(true);
+  };
 
   return (
     <>
       <button
         type="button"
         className={buttonClassName}
-        onClick={() => setIsOpen(true)}
+        onClick={handleClick}
+        disabled={status === "loading"}
         style={{ cursor: "pointer" }}
       >
-        {buttonLabel}
+        {finalLabel}
       </button>
-      {isOpen && <ProtocolWizard onClose={() => setIsOpen(false)} />}
+      {isOpen && !session?.user && <ProtocolWizard onClose={() => setIsOpen(false)} />}
     </>
   );
 }
