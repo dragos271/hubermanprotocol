@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/prisma";
 import { authOptions } from "@/lib/auth";
 import DashboardEnhancements from "./DashboardEnhancements";
-import { getDashboardSummary } from "@/lib/dashboard-data";
+import { getDashboardSummary, linkSessionProtocolsToUser } from "@/lib/dashboard-data";
 
 const SESSION_COOKIE = "hp_protocol_session";
 
@@ -19,6 +19,10 @@ async function getProtocols() {
 
   if (!session?.user?.id && !sessionToken) {
     return [];
+  }
+
+  if (session?.user?.id) {
+    await linkSessionProtocolsToUser(session.user.id, sessionToken);
   }
 
   const orFilters = [];

@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { authOptions } from "@/lib/auth";
+import { cookies } from "next/headers";
 import type {
   AnchorCompletion,
   AnchorSlot,
@@ -115,6 +116,73 @@ type LogWithRelations = DailyAnchorLog & {
   completions: AnchorCompletion[];
   metrics: MetricCheckIn[];
 };
+
+const SESSION_COOKIE = "hp_protocol_session";
+
+export async function linkSessionProtocolsToUser(
+  userId: string,
+  sessionToken?: string | null
+) {
+  if (!userId) {
+    return;
+  }
+
+  const token = sessionToken ?? cookies().get(SESSION_COOKIE)?.value ?? null;
+  if (!token) {
+    return;
+  }
+
+  const orphanedProtocols = await prisma.protocol.findMany({
+    where: {
+      sessionToken: token,
+      userId: null,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (orphanedProtocols.length === 0) {
+    return;
+  }
+
+  const protocolIds = orphanedProtocols.map((protocol) => protocol.id);
+
+  await prisma.$transaction([
+    prisma.protocol.updateMany({
+      where: {
+        id: {
+          in: protocolIds,
+        },
+      },
+      data: {
+        userId,
+      },
+    }),
+    prisma.dailyAnchorLog.updateMany({
+      where: {
+        protocolId: {
+          in: protocolIds,
+        },
+        userId: null,
+      },
+      data: {
+        userId,
+      },
+    }),
+    prisma.metricCheckIn.updateMany({
+      where: {
+        protocolId: {
+          in: protocolIds,
+        },
+        userId: null,
+      },
+      data: {
+        userId,
+      },
+    }),
+  ]);
+}
 
 export type DashboardSummary = {
   anchorSummaries: AnchorSummary[];
@@ -722,6 +790,7 @@ export async function getDashboardSummary(options?: { protocolId?: string }) {
     return null;
   }
   const userId = session.user.id;
+  await linkSessionProtocolsToUser(userId);
 
   const protocol = options?.protocolId
     ? await prisma.protocol.findUnique({
