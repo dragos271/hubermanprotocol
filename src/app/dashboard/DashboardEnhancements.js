@@ -141,6 +141,67 @@ function MetricPreferencesModal({
   );
 }
 
+function DigestPreviewModal({
+  isOpen,
+  html,
+  loading,
+  error,
+  onClose,
+  onCopy,
+  copied,
+}) {
+  if (!isOpen) return null;
+  return (
+    <div className={styles.modalOverlay} role="dialog" aria-modal="true">
+      <div className={`${styles.modalCard} ${styles.digestPreviewModal}`}>
+        <div className={styles.modalHeader}>
+          <h3 className={styles.modalTitle}>Digest preview</h3>
+          <button type="button" className={styles.modalClose} onClick={onClose} aria-label="Close">
+            ×
+          </button>
+        </div>
+        <p className={styles.modalDescription}>
+          See the exact email your next action digest will deliver, based on the latest streaks and metric shifts.
+        </p>
+        <div className={styles.digestPreviewContent}>
+          {loading ? (
+            <p className={styles.digestPreviewEmpty}>Generating preview...</p>
+          ) : error ? (
+            <p className={styles.digestPreviewError}>{error}</p>
+          ) : html ? (
+            <div
+              className={styles.digestPreviewFrame}
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+          ) : (
+            <p className={styles.digestPreviewEmpty}>
+              Log at least one anchor streak to unlock the digest content.
+            </p>
+          )}
+        </div>
+        <div className={styles.modalActions}>
+          <button
+            type="button"
+            className={styles.modalGhostButton}
+            onClick={onClose}
+            disabled={loading}
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            className={styles.modalPrimaryButton}
+            onClick={onCopy}
+            disabled={!html || loading}
+          >
+            {copied ? "Copied!" : "Copy HTML"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ToastStack({ toasts, onCelebrate, onDismiss }) {
   if (!toasts.length) return null;
   return (
@@ -186,6 +247,11 @@ export default function DashboardEnhancements({ summary: initialSummary, latestP
   const milestoneSeenRef = useRef(
     new Set(initialSummary?.milestones?.map((milestone) => milestone.id) ?? [])
   );
+  const [isDigestPreviewOpen, setIsDigestPreviewOpen] = useState(false);
+  const [digestPreviewHtml, setDigestPreviewHtml] = useState("");
+  const [isDigestPreviewLoading, setIsDigestPreviewLoading] = useState(false);
+  const [digestPreviewError, setDigestPreviewError] = useState("");
+  const [digestCopied, setDigestCopied] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   const summary = data ?? initialSummary ?? null;
@@ -390,7 +456,6 @@ export default function DashboardEnhancements({ summary: initialSummary, latestP
         optimistic.goalMetricPreferences.push({ goalId: preferencesGoal.id, metrics });
       }
     }
-    setIsPreferencesSaving(true);
     handleMutation(optimistic, async () => {
       const response = await fetch("/api/dashboard/preferences", {
         method: "POST",
@@ -403,8 +468,55 @@ export default function DashboardEnhancements({ summary: initialSummary, latestP
       }
       return payload.summary;
     });
-    setIsPreferencesSaving(false);
     closePreferences();
+  };
+
+  const handleDigestPreview = async () => {
+    if (!summary) return;
+    setDigestPreviewError("");
+    setDigestPreviewHtml("");
+    setDigestCopied(false);
+    setIsDigestPreviewOpen(true);
+    setIsDigestPreviewLoading(true);
+    try {
+      const response = await fetch("/api/digest/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload.error || "Unable to generate digest.");
+      }
+      setDigestPreviewHtml(payload.html ?? "");
+      if (!payload.html) {
+        setDigestPreviewError("Digest generated without content. Log more data to unlock insights.");
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Unable to generate digest.";
+      setDigestPreviewError(message);
+    } finally {
+      setIsDigestPreviewLoading(false);
+    }
+  };
+
+  const closeDigestPreview = () => {
+    setIsDigestPreviewOpen(false);
+    setDigestPreviewHtml("");
+    setDigestPreviewError("");
+    setDigestCopied(false);
+  };
+
+  const handleCopyDigest = async () => {
+    if (!digestPreviewHtml) return;
+    try {
+      await navigator.clipboard.writeText(digestPreviewHtml);
+      setDigestCopied(true);
+      setTimeout(() => setDigestCopied(false), 2000);
+    } catch (err) {
+      console.error(err);
+      setDigestPreviewError("Unable to copy preview. Copy manually from the window.");
+    }
   };
 
   const handleDismissMilestone = (milestoneId) => {
@@ -835,6 +947,14 @@ export default function DashboardEnhancements({ summary: initialSummary, latestP
                   </button>
                 ))}
               </div>
+              <button
+                type="button"
+                className={styles.digestPreviewButton}
+                onClick={handleDigestPreview}
+                disabled={isDigestPreviewLoading}
+              >
+                {isDigestPreviewLoading ? "Generating preview..." : "Preview next digest"}
+              </button>
             </div>
           </motion.div>
         </motion.section>
@@ -857,6 +977,15 @@ export default function DashboardEnhancements({ summary: initialSummary, latestP
         onClose={closePreferences}
         onSave={handlePreferencesSave}
         saving={isPending}
+      />
+      <DigestPreviewModal
+        isOpen={isDigestPreviewOpen}
+        html={digestPreviewHtml}
+        loading={isDigestPreviewLoading}
+        error={digestPreviewError}
+        onClose={closeDigestPreview}
+        onCopy={handleCopyDigest}
+        copied={digestCopied}
       />
     </>
   );

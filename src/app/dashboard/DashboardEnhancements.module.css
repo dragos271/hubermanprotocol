@@ -572,6 +572,22 @@
   transform: translateY(-1px);
 }
 
+.digestPreviewButton {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(15, 23, 42, 0.65);
+  color: rgba(226, 232, 240, 0.95);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.digestPreviewButton:hover {
+  border-color: rgba(226, 232, 240, 0.65);
+  transform: translateY(-1px);
+}
+
 .milestoneStrip {
   display: grid;
   gap: 12px;
@@ -767,6 +783,40 @@
   font-size: 1.2rem;
 }
 
+.digestPreviewModal {
+  max-width: 720px;
+}
+
+.digestPreviewContent {
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 16px;
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.7);
+  max-height: 420px;
+  overflow: auto;
+}
+
+.digestPreviewFrame {
+  color: rgba(226, 232, 240, 0.92);
+  line-height: 1.55;
+}
+
+.digestPreviewFrame h1,
+.digestPreviewFrame h2,
+.digestPreviewFrame h3 {
+  color: white;
+}
+
+.digestPreviewEmpty {
+  color: rgba(226, 232, 240, 0.75);
+  font-style: italic;
+}
+
+.digestPreviewError {
+  color: #feb2b2;
+  font-weight: 600;
+}
+
 .milestoneStrip {
   display: grid;
   gap: 12px;
@@ -800,6 +850,11 @@
   }
 
   .digestFrequencyButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .digestPreviewButton {
     width: 100%;
     text-align: center;
   }
